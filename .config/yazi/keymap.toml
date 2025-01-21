@@ -27,7 +27,7 @@ desc = "Home"
 
 [[manager.prepend_keymap]]
 on = ["g", "r"]
-run = "cd ~/Documents/Repos"
+run = "cd ~/Repos"
 desc = "Repos"
 
 [[manager.prepend_keymap]]

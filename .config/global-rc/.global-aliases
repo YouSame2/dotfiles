@@ -19,6 +19,7 @@ alias less='less --use-color --ignore-case' # = smartcase
 alias grep="grep --color"
 alias df="df -h"
 
+alias path='echo "$PATH" | tr ":" "\n"'
 
 ###################
 # functions

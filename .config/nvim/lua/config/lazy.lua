@@ -32,7 +32,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
+    enabled = false, -- check for plugin updates periodically
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
@@ -47,6 +47,29 @@ require("lazy").setup({
         "tohtml",
         "tutor",
         "zipPlugin",
+        -- from nvchad
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "tar",
+        "rrhelper",
+        -- "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        -- "zip",
+        -- "rplugin",
+        -- "syntax",
+        -- "synmenu",
+        -- "optwin",
+        -- "compiler",
+        "bugreport",
+        -- "ftplugin",
       },
     },
   },

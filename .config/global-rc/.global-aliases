@@ -21,6 +21,9 @@ alias df="df -h"
 
 alias path='echo "$PATH" | tr ":" "\n"'
 
+alias nvchad="NVIM_APPNAME=nvchad nvim"
+alias lazyvim="NVIM_APPNAME=lazyvim nvim"
+
 ###################
 # functions
 ###################

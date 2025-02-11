@@ -1,76 +1,60 @@
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import/override with your plugins
-    { import = "plugins" },
+    -- import your plugins
+    { import = "plugins" }
   },
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
+    lazy = true,
     version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = {
-    enabled = false, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "default" } },
+  -- automatically check for plugin updates
+  checker = { enabled = false },
   performance = {
     rtp = {
-      -- disable some rtp plugins
+      -- Disable some rtp plugins
       disabled_plugins = {
-        "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-        -- from nvchad
-        "2html_plugin",
-        "getscript",
-        "getscriptPlugin",
-        "gzip",
-        "logipat",
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
-        "tar",
-        "rrhelper",
-        -- "spellfile_plugin",
-        "vimball",
-        "vimballPlugin",
-        -- "zip",
-        -- "rplugin",
-        -- "syntax",
-        -- "synmenu",
-        -- "optwin",
-        -- "compiler",
-        "bugreport",
-        -- "ftplugin",
-      },
+        "bugreport",          -- Provides `:bugreport` command for Neovim issues
+        "gzip",               -- Support for opening .gz files
+        -- "matchit",         -- Enhanced % navigation for matching pairs
+        -- "matchparen",      -- Highlights matching parentheses
+        "tar",                -- Core support for .tar files
+        "tarPlugin",          -- Enables reading .tar archives
+        "tutor",              -- Provides vimtutor inside Neovim
+        "vimball",            -- Saves multiple files into a .vba archive
+        "vimballPlugin",      -- Enables extracting .vba archives
+        "zip",                -- Core support for .zip files
+        "zipPlugin",          -- Enables browsing/editing .zip files
+        -- From NvChad
+        "tohtml",             -- Converts files to HTML with syntax highlighting
+        "2html_plugin",       -- Converts buffers to an HTML file
+        "getscript",          -- Download Vim scripts from vim.org
+        "getscriptPlugin",    -- Enhances getscript functionality
+        "logipat",            -- Old Vim pattern matching helper (unused)
+        "netrw",              -- Core file explorer
+        "netrwPlugin",        -- Plugin features for netrw
+        "netrwSettings",      -- Configuration settings for netrw
+        "netrwFileHandlers",  -- Handles file types in netrw
+        "rrhelper",           -- Developer helper for debugging Vim scripts
+        -- "spellfile_plugin", -- Loads custom spell files
+        -- "rplugin",         -- Remote plugin support (e.g., Python plugins)
+        -- "syntax",          -- Syntax highlighting (disabling removes colors!)
+        -- "synmenu",         -- GUI syntax highlight menu (for Vim GUI)
+        -- "optwin",          -- GUI-like options window
+        -- "compiler",        -- Custom compiler settings for `:make`
+      }
+
     },
-  },
+  }
 })

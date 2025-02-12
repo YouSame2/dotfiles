@@ -39,13 +39,13 @@ return {
         -- "lua_ls",
         -- "ts_ls",
         -- "html",
-        -- "cssls",
-        -- "tailwindcss",
-        -- "svelte",
-        -- "graphql",
-        -- "emmet_ls",
-        -- "prismals",
-        -- "pyright",
+        -- -- "cssls",
+        -- -- "tailwindcss",
+        -- -- "svelte",
+        -- -- "graphql",
+        -- -- "emmet_ls",
+        -- -- "prismals",
+        -- -- "pyright",
         --  },
       })
     end,
@@ -57,16 +57,17 @@ return {
   --   dependencies = {
   --     "williamboman/mason.nvim",
   --   },
+  --   event = "VeryLazy",
   --   config = function()
   --     local mason_tool_installer = require("mason-tool-installer")
   --     mason_tool_installer.setup({
   --       ensure_installed = {
   --         "prettier",
   --         "stylua",
-  --         "isort",
-  --         "black",
-  --         "pylint",
-  --         "eslint_d",
+  --         -- "isort",
+  --         -- "black",
+  --         -- "pylint",
+  --         {'eslint_d', version = '13.1.2'}, -- v14.0.3 is bugged stick with this till fix
   --       },
   --     })
   --   end,

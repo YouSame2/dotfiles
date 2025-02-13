@@ -1,5 +1,11 @@
 return {
   "windwp/nvim-ts-autotag",
-  lazy = false,
+  ft = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+  },
   opts = {},
 }

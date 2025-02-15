@@ -1,4 +1,3 @@
--- NOTE:
 -- =================================
 --          UTIL COMMANDS
 --    for stuff not used often

@@ -14,9 +14,10 @@
   <package id="KB3035131" />
   <package id="less" />
   <package id="ripgrep" />
+  <package id="starship" />
+  <package id="starship.install" />
   <package id="vcredist140" />
   <package id="wezterm" />
   <package id="wezterm.install" />
   <package id="yq" />
-  <package id="starship" />
 </packages>

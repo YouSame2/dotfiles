@@ -68,13 +68,13 @@ return {
       },
     },
 
+    -- snippets = { preset = 'luasnip' }, -- not using luaSnip
+
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
     },
-
-    -- snippets = { preset = 'luasnip' }, -- not using luaSnip
 
     appearance = {
       -- Sets the fallback highlight groups to nvim-cmp's highlight groups

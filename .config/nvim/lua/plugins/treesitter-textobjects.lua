@@ -68,6 +68,7 @@ return {
             ["]a"] = "@parameter.inner",
             ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
             ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+            ["]m"] = { query = "@call.outer", desc = "Prev loop start" },
 
             -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
             -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
@@ -80,6 +81,7 @@ return {
             ["]A"] = "@parameter.inner",
             ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
             ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+            ["]M"] = { query = "@call.outer", desc = "Prev loop start" },
           },
           goto_previous_start = {
             ["[f"] = "@function.outer",
@@ -87,6 +89,7 @@ return {
             ["[a"] = "@parameter.inner",
             ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
             ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+            ["[m"] = { query = "@call.outer", desc = "Prev loop start" },
           },
           goto_previous_end = {
             ["[F"] = "@function.outer",
@@ -94,6 +97,7 @@ return {
             ["[A"] = "@parameter.inner",
             ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
             ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+            ["[M"] = { query = "@call.outer", desc = "Prev loop start" },
           },
         },
       },

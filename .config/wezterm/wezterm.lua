@@ -19,7 +19,7 @@ config.adjust_window_size_when_changing_font_size = false
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.70
 config.macos_window_background_blur = 10
 
 config.front_end = "WebGpu" -- breaks transparency on win

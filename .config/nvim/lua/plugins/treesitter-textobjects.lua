@@ -63,12 +63,12 @@ return {
           enable = true,
           set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
-            ["]f"] = "@function.outer",
-            ["]c"] = "@class.outer",
-            ["]a"] = "@parameter.inner",
+            ["]f"] = { query = "@function.outer", desc = "Next function start" },
+            ["]c"] = { query = "@class.outer", desc = "Next class start" },
+            ["]a"] = { query = "@parameter.inner", desc = "Next argument start" },
             ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
             ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
-            ["]m"] = { query = "@call.outer", desc = "Prev loop start" },
+            ["]m"] = { query = "@call.outer", desc = "Next method start" },
 
             -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
             -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
@@ -76,28 +76,28 @@ return {
             -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
           },
           goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-            ["]A"] = "@parameter.inner",
+            ["]F"] = { query = "@function.outer", desc = "Next function end" },
+            ["]C"] = { query = "@class.outer", desc = "Next class end" },
+            ["]A"] = { query = "@parameter.inner", desc = "Next argument end" },
             ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
             ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
-            ["]M"] = { query = "@call.outer", desc = "Prev loop start" },
+            ["]M"] = { query = "@call.outer", desc = "Next method end" },
           },
           goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[c"] = "@class.outer",
-            ["[a"] = "@parameter.inner",
+            ["[f"] = { query = "@function.outer", desc = "Prev function start" },
+            ["[c"] = { query = "@class.outer", desc = "Prev class start" },
+            ["[a"] = { query = "@parameter.inner", desc = "Prev argument start" },
             ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
             ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
-            ["[m"] = { query = "@call.outer", desc = "Prev loop start" },
+            ["[m"] = { query = "@call.outer", desc = "Prev method start" },
           },
           goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-            ["[A"] = "@parameter.inner",
+            ["[F"] = { query = "@function.outer", desc = "Prev function end" },
+            ["[C"] = { query = "@class.outer", desc = "Prev class end" },
+            ["[A"] = { query = "@parameter.inner", desc = "Prev argument end" },
             ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
             ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
-            ["[M"] = { query = "@call.outer", desc = "Prev loop start" },
+            ["[M"] = { query = "@call.outer", desc = "Prev method end" },
           },
         },
       },
@@ -114,36 +114,5 @@ return {
     vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-
-    -- TODO:
-    -- TSTextobjectGotoNextStart(@function.outter)
-
-    -- vim.keymap.set("n", "]f", "]fzz")
-    -- vim.keymap.set("n", "]c", "]czz")
-    -- vim.keymap.set("n", "]a", "]azz")
-    -- vim.keymap.set("n", "]i", "]izz")
-    -- vim.keymap.set("n", "]l", "]lzz")
-    -- vim.keymap.set("n", "]m", "]mzz")
-    --
-    -- vim.keymap.set("n", "[f", "[fzz")
-    -- vim.keymap.set("n", "[c", "[czz")
-    -- vim.keymap.set("n", "[a", "[azz")
-    -- vim.keymap.set("n", "[i", "[izz")
-    -- vim.keymap.set("n", "[l", "[lzz")
-    -- vim.keymap.set("n", "[m", "[mzz")
-    --
-    -- vim.keymap.set("n", "]F", "]Fzz")
-    -- vim.keymap.set("n", "]C", "]Czz")
-    -- vim.keymap.set("n", "]A", "]Azz")
-    -- vim.keymap.set("n", "]I", "]Izz")
-    -- vim.keymap.set("n", "]L", "]Lzz")
-    -- vim.keymap.set("n", "]M", "]Mzz")
-    --
-    -- vim.keymap.set("n", "[F", "[Fzz")
-    -- vim.keymap.set("n", "[C", "[Czz")
-    -- vim.keymap.set("n", "[A", "[Azz")
-    -- vim.keymap.set("n", "[I", "[Izz")
-    -- vim.keymap.set("n", "[L", "[Lzz")
-    -- vim.keymap.set("n", "[M", "[Mzz")
   end,
 }

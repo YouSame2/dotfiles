@@ -10,8 +10,6 @@ vim.schedule(function()
   require("config.keymaps")
 end)
 
-vim.keymap.set("n", "]b", "]a")
-
 -- function fix_telescope_parens_win()
 -- 	if vim.fn.has("win32") then
 -- 		local ori_fnameescape = vim.fn.fnameescape

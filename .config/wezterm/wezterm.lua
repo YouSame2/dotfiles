@@ -19,7 +19,7 @@ config.adjust_window_size_when_changing_font_size = false
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 
-config.window_background_opacity = 0.70
+config.window_background_opacity = 0.90
 config.macos_window_background_blur = 10
 
 config.front_end = "WebGpu" -- breaks transparency on win
@@ -68,8 +68,8 @@ end
 
 config.keys = {
 	-- Term Only Keybinds
-	TermOnlyKey("w", "SUPER", act.CloseCurrentTab({ confirm = true })),
-	TermOnlyKey("w", "LEADER", act.CloseCurrentTab({ confirm = true })),
+	TermOnlyKey("w", "SUPER", act.CloseCurrentTab({ confirm = false })),
+	TermOnlyKey("w", "LEADER", act.CloseCurrentTab({ confirm = false })),
 	TermOnlyKey("q", "LEADER", act.QuitApplication),
 	TermOnlyKey("q", "SUPER", act.QuitApplication),
 
@@ -81,6 +81,13 @@ config.keys = {
 	TermOnlyKey("f", "CTRL", act.QuickSelect),
 	TermOnlyKey("l", "CTRL|SHIFT", act.ShowDebugOverlay),
 	TermOnlyKey("p", "CTRL|SHIFT", act.ActivateCommandPalette),
+
+	TermOnlyKey("c", "SUPER", act.CopyTo("Clipboard")), -- have sep keymaps in vim for copy/paste
+	TermOnlyKey("C", "SHIFT|CTRL", act.CopyTo("Clipboard")),
+	TermOnlyKey("Copy", "NONE", act.CopyTo("Clipboard")),
+	TermOnlyKey("v", "SUPER", act.PasteFrom("Clipboard")),
+	TermOnlyKey("V", "SHIFT|CTRL", act.PasteFrom("Clipboard")),
+	TermOnlyKey("Paste", "NONE", act.PasteFrom("Clipboard")),
 
 	-- Universal Keybinds
 	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) }, -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
@@ -130,13 +137,6 @@ config.keys = {
 	{ key = "=", mods = "CTRL|LEADER", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CTRL|LEADER", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CTRL|LEADER", action = act.ResetFontSize },
-
-	{ key = "c", mods = "SUPER", action = act.CopyTo("Clipboard") },
-	{ key = "C", mods = "SHIFT|CTRL", action = act.CopyTo("Clipboard") },
-	{ key = "Copy", mods = "NONE", action = act.CopyTo("Clipboard") },
-	{ key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") },
-	{ key = "V", mods = "SHIFT|CTRL", action = act.PasteFrom("Clipboard") },
-	{ key = "Paste", mods = "NONE", action = act.PasteFrom("Clipboard") },
 }
 
 -- -- default key_tables for reference

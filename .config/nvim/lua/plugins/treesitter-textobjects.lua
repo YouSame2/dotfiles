@@ -114,5 +114,63 @@ return {
     vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+
+    -- NOTE: below redefines move keymaps for text objects in n mode only. it centers the screen after move. autocmd is neccesary due to TS creating buffer keymaps not global keymaps. hense `buffer = e.buf`. TS keymaps also makes keymaps for other modes so its better to leave them. ofc it would be better to refactor this but this is easier to read and understand for others.
+    vim.api.nvim_create_augroup("custom_ts_move", {})
+    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
+      group = "custom_ts_move",
+      callback = function(e)
+        -- @function.outer
+        vim.keymap.set(
+          "n",
+          "]f",
+          "<cmd>TSTextobjectGotoNextStart @function.outer<CR>zz",
+          { buffer = e.buf, desc = "Next function start" }
+        )
+        vim.keymap.set(
+          "n",
+          "]F",
+          "<cmd>TSTextobjectGotoNextEnd @function.outer<CR>zz",
+          { buffer = e.buf, desc = "Next function end" }
+        )
+        vim.keymap.set(
+          "n",
+          "[f",
+          "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zz",
+          { buffer = e.buf, desc = "Prev function start" }
+        )
+        vim.keymap.set(
+          "n",
+          "[F",
+          "<cmd>TSTextobjectGotoPreviousEnd @function.outer<CR>zz",
+          { buffer = e.buf, desc = "Prev function end" }
+        )
+        -- @class.outer
+        vim.keymap.set(
+          "n",
+          "]c",
+          "<cmd>TSTextobjectGotoNextStart @class.outer<CR>zz",
+          { buffer = e.buf, desc = "Next class start" }
+        )
+        vim.keymap.set(
+          "n",
+          "]C",
+          "<cmd>TSTextobjectGotoNextEnd @class.outer<CR>zz",
+          { buffer = e.buf, desc = "Next class end" }
+        )
+        vim.keymap.set(
+          "n",
+          "[c",
+          "<cmd>TSTextobjectGotoPreviousStart @class.outer<CR>zz",
+          { buffer = e.buf, desc = "Prev class start" }
+        )
+        vim.keymap.set(
+          "n",
+          "[C",
+          "<cmd>TSTextobjectGotoPreviousEnd @class.outer<CR>zz",
+          { buffer = e.buf, desc = "Prev class end" }
+        )
+      end,
+    })
   end,
 }

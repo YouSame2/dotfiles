@@ -4,7 +4,11 @@ return {
   event = "VeryLazy",
   config = function()
     -- MINI.COMMENT
-    require("mini.comment").setup()
+    require("mini.comment").setup({
+      options = {
+        ignore_blank_line = true, -- THANK GOD!
+      },
+    })
     require("mini.splitjoin").setup({ mappings = { toggle = "as" } })
 
     -- MINI.SURROUND

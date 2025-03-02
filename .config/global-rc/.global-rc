@@ -13,16 +13,16 @@ echo -e "
 "
 
 
-###################
+# ==================
 # exports
-###################
+# ==================
 
 export DOTFILES=~/Repos/Personal/dotfiles
+export CDPATH=".:/c/Users/Patrick Star/.config" # colon sep list of dirs for 'cd' speed dial like zoxide
 
-
-###################
+# ==================
 # ULTIMATE FZF SETUP!
-###################
+# ==================
 
 # the whole point of this is to enable ignored files from popping up in fzf and anything that uses it. for example i have a professional folder i dont want to accidentally show when fuzzy finding. stock 'find' command is cumbersome, so i spent 2 days fiddling with other apps to get it to work.
 
@@ -31,14 +31,16 @@ export DOTFILES=~/Repos/Personal/dotfiles
 # fzf defaults (i.e. just running fzf in terminal)
 export FZF_DEFAULT_COMMAND="fd --hidden --ignore-case --follow"
 # options for all fzf windows
-export FZF_DEFAULT_OPTS='--info inline-right --border-label "| NVIM btw |" --height=40% --reverse --info inline-right --border=rounded --pointer="→" --marker="✔" --margin 1'
+export FZF_DEFAULT_OPTS='--info inline-right --border-label "| NVIM btw |" --height=40% --reverse --info inline-right --border=rounded --pointer="→" --marker="✔" --margin 1 --preview="bat -n --color=always {}"'
 # Options for completion mode.
 export FZF_COMPLETION_OPTS='--border-label "| COMPLETION MODE - NVIM btw |"'
 # changing default CTRL-* commands
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type dir"
+export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview='' --border-label '| CD MODE - NVIM btw |'"
+export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview='' --border-label '| CMD HISTORY MODE - NVIM btw |'"
 
-# replacing default completion for path (i.e. ls ** TAB) & dir (i.e. cd ** TAB)
+# replacing default completion command opts (i.e. ls ** TAB) & dir (i.e. cd ** TAB)
 _fzf_compgen_path() {
   fd --hidden --ignore-case --follow "$1"
 }
@@ -59,9 +61,9 @@ _fzf_comprun() {
 }
 
 
-###################
+# ==================
 # keybindings
-###################
+# ==================
 
 
 

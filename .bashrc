@@ -25,9 +25,6 @@ eval "$(starship init bash)"
 # aliases
 ###################
 
-# dotfiles and stuff
-alias restrap="choco export -o='$DOTFILES/bootstrap/windows/packages.config'"
-
 # match zsh functions alias
 alias functions='declare -F'
 
@@ -53,6 +50,8 @@ bind -m vi-insert 'Control-l: clear-screen'
 # bind 'set show-all-if-ambiguous on' # if you prefer list of options
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
+bind '"\C-k": previous-history'
+bind '"\C-j": next-history'
 bind "set completion-ignore-case on" # ignore case in TAB completion
 
 

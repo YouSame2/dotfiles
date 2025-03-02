@@ -14,7 +14,6 @@ return {
   config = function()
     -- == LSP keymaps only after LSP Attach == --
     local on_attach_keys = function(_, bufnr)
-      -- TODO: add cnext cprev
       local keymap = vim.keymap
       local function opts(desc)
         return { buffer = bufnr, desc = "LSP: " .. desc }

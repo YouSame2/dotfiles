@@ -27,12 +27,12 @@ return {
     --   desc = "Todo/Fix/Fixme (Trouble)"
     -- },
     {
-      "<leader>st",
+      "<leader>ft",
       "<cmd>TodoTelescope<cr>",
       desc = "Todo"
     },
     {
-      "<leader>sT",
+      "<leader>fT",
       "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",
       desc = "Todo/Fix/Fixme"
     },

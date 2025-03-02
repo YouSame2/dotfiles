@@ -1,16 +1,39 @@
 ---------- CREDIT AND RESOURCES --------
 -- https://github.com/mplusp/dotfiles/tree/main
-
--- pull in the wezterm API
 local wezterm = require("wezterm")
-
--- This will hold the configuration
 local config = wezterm.config_builder()
 
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.font_size = 10
 
-config.color_scheme = "Tokyo Night"
+-- sorted fav to least fav
+local themes = {
+  "Sex Colors (terminal.sexy)", -- obviously
+  "synthwave",
+  "Argonaut (Gogh)",
+  "One Half Black (Gogh)",
+  "NvimDark",
+  "Orangish (terminal.sexy)",
+  "Gruvbox Material (Gogh)",
+  "Raycast_Dark",
+  "Tokyo Night",
+}
+config.color_scheme = themes[3]
+config.colors = {
+  -- not being able to see search hl drives me nuts
+  copy_mode_inactive_highlight_bg = { Color = "#394b70" },
+  copy_mode_inactive_highlight_fg = { AnsiColor = "White" },
+  selection_bg = "#c0caf5",
+  selection_fg = "#1f2335",
+
+  -- reset cursor colors
+  cursor_bg = "#c0caf5",
+  cursor_border = "#c0caf5",
+  cursor_fg = "#1a1b26",
+  compose_cursor = "#ff9e64",
+  -- better background
+  background = "#000000",
+}
 
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
@@ -31,18 +54,18 @@ config.cursor_blink_rate = 500
 
 ---------- WINDOWS SPECIFIC SETTINGS --------
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- LEGACY use powershell (for win 11 i think its 'pwsh.exe')
-	-- config.default_prog = { 'powershell.exe' }
+  -- LEGACY use powershell (for win 11 i think its 'pwsh.exe')
+  -- config.default_prog = { 'powershell.exe' }
 
-	-- Use Git Bash
-	config.front_end = "OpenGL"
-	config.default_prog = { "C:/Program Files/Git/bin/bash.exe", "--login" }
-	config.max_fps = 144
-	config.animation_fps = 144
+  -- Use Git Bash
+  config.front_end = "OpenGL"
+  config.default_prog = { "C:/Program Files/Git/bin/bash.exe", "--login" }
+  config.max_fps = 144
+  config.animation_fps = 144
 
-	-- wasnt working for me
-	-- Possible values = Auto | Disable | Acrylic | Mica | Tabbed
-	-- config.win32_system_backdrop = 'Acrylic'
+  -- wasnt working for me
+  -- Possible values = Auto | Disable | Acrylic | Mica | Tabbed
+  -- config.win32_system_backdrop = 'Acrylic'
 end
 
 ---------- KEYBINDINGS --------
@@ -51,92 +74,115 @@ config.disable_default_key_bindings = true
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local act = wezterm.action
 
--- creates keymap that doesnt work in any fullscreen TUI (i.e. nvim, yazi)
+-- creates keymap that dont work in any fullscreen TUI (i.e. nvim, yazi)
 function TermOnlyKey(key, mods, action)
-	local keybind = {}
-	keybind.key = key
-	keybind.mods = mods
-	keybind.action = wezterm.action_callback(function(window, pane)
-		if pane:is_alt_screen_active() then
-			window:perform_action(act.SendKey({ key = key, mods = mods }), pane)
-		else
-			window:perform_action(action, pane)
-		end
-	end)
-	return keybind
+  local keybind = {}
+  keybind.key = key
+  keybind.mods = mods
+  keybind.action = wezterm.action_callback(function(window, pane)
+    if pane:is_alt_screen_active() then
+      window:perform_action(act.SendKey({ key = key, mods = mods }), pane)
+    else
+      for _, task in ipairs(action) do
+        window:perform_action(task, pane)
+      end
+    end
+  end)
+  return keybind
 end
 
 config.keys = {
-	-- Term Only Keybinds
-	TermOnlyKey("w", "SUPER", act.CloseCurrentTab({ confirm = false })),
-	TermOnlyKey("w", "LEADER", act.CloseCurrentTab({ confirm = false })),
-	TermOnlyKey("q", "LEADER", act.QuitApplication),
-	TermOnlyKey("q", "SUPER", act.QuitApplication),
+  -- Term Only Keybinds
+  TermOnlyKey("w", "SUPER", { act.CloseCurrentTab({ confirm = false }) }),
+  TermOnlyKey("w", "LEADER", { act.CloseCurrentTab({ confirm = false }) }),
+  TermOnlyKey("q", "LEADER", { act.QuitApplication }),
+  TermOnlyKey("q", "SUPER", { act.QuitApplication }),
 
-	TermOnlyKey("j", "CTRL", act.ScrollByPage(0.5)),
-	TermOnlyKey("k", "CTRL", act.ScrollByPage(-0.5)),
+  TermOnlyKey("d", "CTRL", { act.ScrollByPage(0.5) }),
+  TermOnlyKey("u", "CTRL", { act.ScrollByPage(-0.5) }),
+  TermOnlyKey("PageDown", "NONE", { act.ScrollByPage(0.5) }),
+  TermOnlyKey("PageUp", "NONE", { act.ScrollByPage(-0.5) }),
 
-	TermOnlyKey("/", "CTRL", act.Search("CurrentSelectionOrEmptyString")),
-	TermOnlyKey("x", "CTRL", act.ActivateCopyMode),
-	TermOnlyKey("f", "CTRL", act.QuickSelect),
-	TermOnlyKey("l", "CTRL|SHIFT", act.ShowDebugOverlay),
-	TermOnlyKey("p", "CTRL|SHIFT", act.ActivateCommandPalette),
+  TermOnlyKey("/", "CTRL", { act.Search({ CaseInSensitiveString = "" }) }),
+  TermOnlyKey("x", "CTRL", { act.ActivateCopyMode }),
+  TermOnlyKey("l", "CTRL|SHIFT", { act.ShowDebugOverlay }),
+  TermOnlyKey("p", "CTRL|SHIFT", { act.ActivateCommandPalette }),
+  TermOnlyKey(
+    "k",
+    "CTRL|SHIFT",
+    { act.ClearScrollback("ScrollbackAndViewport"), act.SendKey({ key = "l", mods = "CTRL" }) }
+  ),
 
-	TermOnlyKey("c", "SUPER", act.CopyTo("Clipboard")), -- have sep keymaps in vim for copy/paste
-	TermOnlyKey("C", "SHIFT|CTRL", act.CopyTo("Clipboard")),
-	TermOnlyKey("Copy", "NONE", act.CopyTo("Clipboard")),
-	TermOnlyKey("v", "SUPER", act.PasteFrom("Clipboard")),
-	TermOnlyKey("V", "SHIFT|CTRL", act.PasteFrom("Clipboard")),
-	TermOnlyKey("Paste", "NONE", act.PasteFrom("Clipboard")),
+  TermOnlyKey("c", "SUPER", { act.CopyTo("Clipboard"), act.ClearSelection }), -- have sep keymaps in vim for copy/paste
+  TermOnlyKey("C", "SHIFT|CTRL", { act.CopyTo("Clipboard"), act.ClearSelection }),
+  TermOnlyKey("Copy", "NONE", { act.CopyTo("Clipboard"), act.ClearSelection }),
+  TermOnlyKey("v", "SUPER", { act.PasteFrom("Clipboard") }),
+  TermOnlyKey("V", "SHIFT|CTRL", { act.PasteFrom("Clipboard") }),
+  TermOnlyKey("Paste", "NONE", { act.PasteFrom("Clipboard") }),
 
-	-- Universal Keybinds
-	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) }, -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
+  -- Universal Keybinds
+  { key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) }, -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
 
-	{ key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	{ key = "n", mods = "LEADER", action = act.SpawnWindow },
-	{ key = "n", mods = "SUPER", action = act.SpawnWindow },
-	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "t", mods = "SUPER", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "m", mods = "LEADER", action = act.TogglePaneZoomState },
-	{ key = "r", mods = "LEADER", action = act.RotatePanes("Clockwise") },
+  { key = "v", mods = "LEADER",      action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "s", mods = "LEADER",      action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "n", mods = "LEADER",      action = act.SpawnWindow },
+  { key = "n", mods = "SUPER",       action = act.SpawnWindow },
+  { key = "t", mods = "LEADER",      action = act.SpawnTab("CurrentPaneDomain") },
+  { key = "t", mods = "SUPER",       action = act.SpawnTab("CurrentPaneDomain") },
+  { key = "m", mods = "LEADER",      action = act.TogglePaneZoomState },
+  { key = "r", mods = "LEADER",      action = act.RotatePanes("Clockwise") },
 
-	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+  { key = "h", mods = "LEADER",      action = act.ActivatePaneDirection("Left") },
+  { key = "l", mods = "LEADER",      action = act.ActivatePaneDirection("Right") },
+  { key = "k", mods = "LEADER",      action = act.ActivatePaneDirection("Up") },
+  { key = "j", mods = "LEADER",      action = act.ActivatePaneDirection("Down") },
 
-	{ key = "h", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Left", 15 }) },
-	{ key = "l", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Right", 15 }) },
-	{ key = "k", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
-	{ key = "j", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
+  { key = "h", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Left", 15 }) },
+  { key = "l", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Right", 15 }) },
+  { key = "k", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+  { key = "j", mods = "CTRL|LEADER", action = act.AdjustPaneSize({ "Down", 5 }) },
 
-	{ key = ",", mods = "LEADER", action = act.MoveTabRelative(-1) }, -- , is easier than <
-	{ key = ".", mods = "LEADER", action = act.MoveTabRelative(1) },
-	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-	{ key = "1", mods = "SUPER", action = act.ActivateTab(0) },
-	{ key = "2", mods = "SUPER", action = act.ActivateTab(1) },
-	{ key = "3", mods = "SUPER", action = act.ActivateTab(2) },
-	{ key = "4", mods = "SUPER", action = act.ActivateTab(3) },
-	{ key = "5", mods = "SUPER", action = act.ActivateTab(4) },
-	{ key = "6", mods = "SUPER", action = act.ActivateTab(5) },
-	{ key = "7", mods = "SUPER", action = act.ActivateTab(6) },
-	{ key = "8", mods = "SUPER", action = act.ActivateTab(7) },
-	{ key = "9", mods = "SUPER", action = act.ActivateTab(-1) },
-	{ key = "1", mods = "LEADER", action = act.ActivateTab(0) },
-	{ key = "2", mods = "LEADER", action = act.ActivateTab(1) },
-	{ key = "3", mods = "LEADER", action = act.ActivateTab(2) },
-	{ key = "4", mods = "LEADER", action = act.ActivateTab(3) },
-	{ key = "5", mods = "LEADER", action = act.ActivateTab(4) },
-	{ key = "6", mods = "LEADER", action = act.ActivateTab(5) },
-	{ key = "7", mods = "LEADER", action = act.ActivateTab(6) },
-	{ key = "8", mods = "LEADER", action = act.ActivateTab(7) },
-	{ key = "9", mods = "LEADER", action = act.ActivateTab(-1) },
+  { key = ",", mods = "LEADER",      action = act.MoveTabRelative(-1) }, -- , is easier than <
+  { key = ".", mods = "LEADER",      action = act.MoveTabRelative(1) },
+  { key = "]", mods = "LEADER",      action = act.ActivateTabRelative(1) },
+  { key = "[", mods = "LEADER",      action = act.ActivateTabRelative(-1) },
+  { key = "1", mods = "SUPER",       action = act.ActivateTab(0) },
+  { key = "2", mods = "SUPER",       action = act.ActivateTab(1) },
+  { key = "3", mods = "SUPER",       action = act.ActivateTab(2) },
+  { key = "4", mods = "SUPER",       action = act.ActivateTab(3) },
+  { key = "5", mods = "SUPER",       action = act.ActivateTab(4) },
+  { key = "6", mods = "SUPER",       action = act.ActivateTab(5) },
+  { key = "7", mods = "SUPER",       action = act.ActivateTab(6) },
+  { key = "8", mods = "SUPER",       action = act.ActivateTab(7) },
+  { key = "9", mods = "SUPER",       action = act.ActivateTab(-1) },
+  { key = "1", mods = "LEADER",      action = act.ActivateTab(0) },
+  { key = "2", mods = "LEADER",      action = act.ActivateTab(1) },
+  { key = "3", mods = "LEADER",      action = act.ActivateTab(2) },
+  { key = "4", mods = "LEADER",      action = act.ActivateTab(3) },
+  { key = "5", mods = "LEADER",      action = act.ActivateTab(4) },
+  { key = "6", mods = "LEADER",      action = act.ActivateTab(5) },
+  { key = "7", mods = "LEADER",      action = act.ActivateTab(6) },
+  { key = "8", mods = "LEADER",      action = act.ActivateTab(7) },
+  { key = "9", mods = "LEADER",      action = act.ActivateTab(-1) },
 
-	{ key = "=", mods = "CTRL|LEADER", action = act.IncreaseFontSize },
-	{ key = "-", mods = "CTRL|LEADER", action = act.DecreaseFontSize },
-	{ key = "0", mods = "CTRL|LEADER", action = act.ResetFontSize },
+  { key = "=", mods = "CTRL|LEADER", action = act.IncreaseFontSize },
+  { key = "-", mods = "CTRL|LEADER", action = act.DecreaseFontSize },
+  { key = "0", mods = "CTRL|LEADER", action = act.ResetFontSize },
+  { key = " ", mods = "CTRL",        action = wezterm.action.SendKey({ key = " ", mods = "CTRL" }) },     -- windows ctrl-space fix
+  { key = " ", mods = "CTRL|SHIFT",  action = wezterm.action.SendKey({ key = " ", mods = "CTRL|SHIFT" }) }, -- windows ctrl-shift-space fix
+}
+
+-- only change desired key_table values without overridding all values
+local search_mode = wezterm.gui.default_key_tables().search_mode
+-- local copy_mode = wezterm.gui.default_key_tables().copy_mode
+table.insert(search_mode, {
+  key = "Escape",
+  mods = "NONE",
+  action = act.Multiple({ act.CopyMode("ClearPattern"), act.CopyMode("Close") }), -- really wezterm? why not clear my search by default?
+})
+config.key_tables = {
+  search_mode = search_mode,
+  -- copy_mode = copy_mode,
 }
 
 -- -- default key_tables for reference

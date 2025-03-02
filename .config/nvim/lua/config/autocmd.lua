@@ -1,29 +1,75 @@
+-- ===========================
+--          AUTO CMDS
+-- ===========================
+
 local function augroup(name)
-  return vim.api.nvim_create_augroup("my_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("my_" .. name, { clear = true })
 end
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
-  callback = function()
-    (vim.hl or vim.highlight).on_yank()
-  end,
+	group = augroup("highlight_yank"),
+	callback = function()
+		(vim.hl or vim.highlight).on_yank()
+	end,
+})
+
+-- dont insert comment when addint new line above comment
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("set_format_opts"),
+	callback = function()
+		vim.opt.formatoptions:remove("o")
+	end,
 })
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
-  callback = function(event)
-    local exclude = { "gitcommit" }
-    local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
-      return
-    end
-    local mark = vim.api.nvim_buf_get_mark(buf, '"')
-    local lcount = vim.api.nvim_buf_line_count(buf)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-      vim.api.nvim_feedkeys("zz", "n", false)
-    end
-  end,
+	group = augroup("last_loc"),
+	callback = function(event)
+		local exclude = { "gitcommit" }
+		local buf = event.buf
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
+			return
+		end
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+			vim.api.nvim_feedkeys("zz", "m", false) -- 'zz' is remapped by GoUp plugin. 'm' allows remaps
+		end
+	end,
 })
+
+-- ===========================
+--          USER CMDS
+-- ===========================
+
+-- my rapper function ;P fyi it goes together with my keymaps.lua
+local function ToggleRap()
+	-- set notification
+	local ok, fidget = pcall(require, "fidget")
+	if ok then
+		vim.notify = fidget.notify
+	end
+
+	---@diagnostic disable-next-line: undefined-field
+	local wrap = vim.opt_global.wrap:get()
+	local cur_win_nr = vim.fn.winnr()
+
+	if wrap then
+		-- toggle wrap off and keymaps
+		vim.cmd("set nowrap nolinebreak formatoptions+=l") -- set for future buffers
+		vim.cmd("windo set nowrap nolinebreak formatoptions+=l") -- set for cur windo
+		vim.cmd(cur_win_nr .. "wincmd w")
+		vim.notify("❌ Rap disabled")
+	else
+		-- toggle wrap on & keymaps
+		vim.cmd("set wrap linebreak formatoptions-=l")
+		vim.cmd("windo set wrap linebreak formatoptions-=l")
+		vim.cmd(cur_win_nr .. "wincmd w")
+		vim.notify("✅ Rap enabled")
+	end
+end
+
+vim.api.nvim_create_user_command("ToggleRap", ToggleRap, { desc = "Toggle wrap and keymaps" })
+vim.keymap.set("n", "<leader>uw", "<cmd>ToggleRap<CR>", { desc = "[u]i toggle line [w]rap and movement" })

@@ -23,44 +23,49 @@ return {
 		})
 
 		-- KEYMAPS
-		local keymap = vim.keymap
-		keymap.set("n", "]h", function()
+		vim.keymap.set("n", "]h", function()
 			if vim.wo.diff then
 				vim.cmd.normal({ "]c", bang = true })
+				require("go-up").centerScreen()
 			else
 				gs.nav_hunk("next")
+				require("go-up").centerScreen()
 			end
 		end, { desc = "Next Hunk" })
-		keymap.set("n", "[h", function()
+		vim.keymap.set("n", "[h", function()
 			if vim.wo.diff then
 				vim.cmd.normal({ "[c", bang = true })
+				require("go-up").centerScreen()
 			else
 				gs.nav_hunk("prev")
+				require("go-up").centerScreen()
 			end
 		end, { desc = "Prev Hunk" })
-		keymap.set("n", "]H", function()
+		vim.keymap.set("n", "]H", function()
 			gs.nav_hunk("last")
+			require("go-up").centerScreen()
 		end, { desc = "Last Hunk" })
-		keymap.set("n", "[H", function()
+		vim.keymap.set("n", "[H", function()
 			gs.nav_hunk("first")
+			require("go-up").centerScreen()
 		end, { desc = "First Hunk" })
-		keymap.set({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
-		keymap.set({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
-		keymap.set("n", "<leader>ghS", gs.stage_buffer, { desc = "Stage Buffer" })
-		keymap.set("n", "<leader>ghu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
-		keymap.set("n", "<leader>ghR", gs.reset_buffer, { desc = "Reset Buffer" })
-		keymap.set("n", "<leader>ghp", gs.preview_hunk_inline, { desc = "Preview Hunk Inline" })
-		keymap.set("n", "<leader>ghb", function()
+		vim.keymap.set({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
+		vim.keymap.set({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
+		vim.keymap.set("n", "<leader>ghS", gs.stage_buffer, { desc = "Stage Buffer" })
+		vim.keymap.set("n", "<leader>ghu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+		vim.keymap.set("n", "<leader>ghR", gs.reset_buffer, { desc = "Reset Buffer" })
+		vim.keymap.set("n", "<leader>ghp", gs.preview_hunk_inline, { desc = "Preview Hunk Inline" })
+		vim.keymap.set("n", "<leader>ghb", function()
 			gs.blame_line({ full = true })
 		end, { desc = "Blame Line" })
-		keymap.set("n", "<leader>ghB", function()
+		vim.keymap.set("n", "<leader>ghB", function()
 			gs.blame()
 		end, { desc = "Blame Buffer" })
-		keymap.set("n", "<leader>ghd", gs.diffthis, { desc = "Diff This" })
-		keymap.set("n", "<leader>ghD", function()
+		vim.keymap.set("n", "<leader>ghd", gs.diffthis, { desc = "Diff This" })
+		vim.keymap.set("n", "<leader>ghD", function()
 			gs.diffthis("~")
 		end, { desc = "Diff This ~" })
-		keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "GitSigns Select Hunk" })
+		vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "GitSigns Select Hunk" })
 	end,
 }
 

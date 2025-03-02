@@ -125,50 +125,50 @@ return {
           "n",
           "]f",
           "<cmd>TSTextobjectGotoNextStart @function.outer<CR>zz",
-          { buffer = e.buf, desc = "Next function start" }
+          { buffer = e.buf, desc = "Next function start" , remap = true}
         )
         vim.keymap.set(
           "n",
           "]F",
           "<cmd>TSTextobjectGotoNextEnd @function.outer<CR>zz",
-          { buffer = e.buf, desc = "Next function end" }
+          { buffer = e.buf, desc = "Next function end" , remap = true}
         )
         vim.keymap.set(
           "n",
           "[f",
           "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zz",
-          { buffer = e.buf, desc = "Prev function start" }
+          { buffer = e.buf, desc = "Prev function start" , remap = true}
         )
         vim.keymap.set(
           "n",
           "[F",
           "<cmd>TSTextobjectGotoPreviousEnd @function.outer<CR>zz",
-          { buffer = e.buf, desc = "Prev function end" }
+          { buffer = e.buf, desc = "Prev function end" , remap = true}
         )
         -- @class.outer
         vim.keymap.set(
           "n",
           "]c",
           "<cmd>TSTextobjectGotoNextStart @class.outer<CR>zz",
-          { buffer = e.buf, desc = "Next class start" }
+          { buffer = e.buf, desc = "Next class start" , remap = true}
         )
         vim.keymap.set(
           "n",
           "]C",
           "<cmd>TSTextobjectGotoNextEnd @class.outer<CR>zz",
-          { buffer = e.buf, desc = "Next class end" }
+          { buffer = e.buf, desc = "Next class end" , remap = true}
         )
         vim.keymap.set(
           "n",
           "[c",
           "<cmd>TSTextobjectGotoPreviousStart @class.outer<CR>zz",
-          { buffer = e.buf, desc = "Prev class start" }
+          { buffer = e.buf, desc = "Prev class start" , remap = true}
         )
         vim.keymap.set(
           "n",
           "[C",
           "<cmd>TSTextobjectGotoPreviousEnd @class.outer<CR>zz",
-          { buffer = e.buf, desc = "Prev class end" }
+          { buffer = e.buf, desc = "Prev class end" , remap = true}
         )
       end,
     })

@@ -1,1 +1,0 @@
-- "xiyaowong/transparent.nvim"

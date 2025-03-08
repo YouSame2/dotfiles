@@ -9,8 +9,7 @@ return {
         ignore_blank_line = true, -- THANK GOD!
       },
     })
-    -- TODO: find better keymap for this
-    require("mini.splitjoin").setup({ mappings = { toggle = "as" } })
+    require("mini.splitjoin").setup({ mappings = { toggle = "sj" } })
 
     -- MINI.SURROUND
     require("mini.surround").setup({

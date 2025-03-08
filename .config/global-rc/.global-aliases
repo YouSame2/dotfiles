@@ -16,7 +16,8 @@ alias lt='eza -aTh -L 1 --color=always --icons=always --group-directories-first 
 
 alias less='less --use-color --ignore-case' # = smartcase
 
-alias grep="grep --color"
+alias grep="grep --color --ignore-case"
+alias rg="rg --smart-case"
 alias df="df -h"
 
 alias path='echo "$PATH" | tr ":" "\n"'

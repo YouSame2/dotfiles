@@ -113,7 +113,7 @@ return {
 			function()
 				require("telescope.builtin").current_buffer_fuzzy_find()
 			end,
-			desc = "[s]ind current [w]ord",
+			desc = "[/] Fuzzily search in current buffer",
 		},
 		{
 			"<leader>sw",
@@ -220,3 +220,16 @@ return {
 		require("telescope").load_extension("fzf")
 	end,
 }
+--[[ OTHER EXAMPLES
+
+-- Slightly advanced example of overriding default behavior and theme
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+
+]]

@@ -13,18 +13,22 @@ return {
 			local mason_dir = "C:\\Users\\PATRIC~1\\AppData\\Local\\nvim-data\\mason\\bin\\"
 
 			if is_windows then
-				formatters.prettier = {
-					command = mason_dir .. "prettier.cmd",
-				}
+				-- NOTE: later found out not all have issues? leaving others just incase
 				formatters.stylua = {
 					command = mason_dir .. "stylua.cmd",
 				}
-				formatters.isort = {
-					command = mason_dir .. "isort.cmd",
+				formatters.shfmt = {
+					command = mason_dir .. "shfmt.cmd",
 				}
-				formatters.black = {
-					command = mason_dir .. "black.cmd",
-				}
+				-- formatters.prettier = {
+				-- 	command = mason_dir .. "prettier.cmd",
+				-- }
+				-- formatters.isort = {
+				-- 	command = mason_dir .. "isort.cmd",
+				-- }
+				-- formatters.black = {
+				-- 	command = mason_dir .. "black.cmd",
+				-- }
 			end
 
 			return formatters
@@ -48,6 +52,8 @@ return {
 				-- graphql = { "prettier" },
 				-- liquid = { "prettier" },
 				lua = { "stylua" },
+				bash = { "beautysh" },
+				sh = { "shfmt" },
 				python = { "isort", "black" },
 			},
 			formatters = get_formatters(),

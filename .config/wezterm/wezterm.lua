@@ -1,10 +1,9 @@
----------- CREDIT AND RESOURCES --------
--- https://github.com/mplusp/dotfiles/tree/main
+-- https://github.com/mplusp/dotfiles/tree/main -- good resource
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("JetBrainsMonoNL Nerd Font Mono")
-config.font_size = 10
+config.font = wezterm.font("Hack Nerd Font Mono")
+config.font_size = 13
 
 -- sorted fav to least fav
 local themes = {
@@ -52,8 +51,12 @@ config.default_cursor_style = "BlinkingBlock"
 config.animation_fps = 60
 config.cursor_blink_rate = 500
 
----------- WINDOWS SPECIFIC SETTINGS --------
+-- ===========================
+-- WINDOWS SPECIFIC SETTINGS
+-- ===========================
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	config.font_size = 10
+
 	-- LEGACY use powershell (for win 11 i think its 'pwsh.exe')
 	-- config.default_prog = { 'powershell.exe' }
 
@@ -68,7 +71,9 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- config.win32_system_backdrop = 'Acrylic'
 end
 
----------- KEYBINDINGS --------
+-- ===========================
+--       KEYBINDINGS
+-- ===========================
 
 config.disable_default_key_bindings = true
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }

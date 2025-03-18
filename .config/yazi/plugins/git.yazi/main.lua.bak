@@ -147,9 +147,9 @@ local function setup(st, opts)
 		if not change or signs[change] == "" then
 			return ui.Line("")
 		elseif self._file:is_hovered() then
-			return ui.Line({ ui.Span(" "), ui.Span(signs[change]) })
+			return ui.Line { ui.Span(" "), ui.Span(signs[change]) }
 		else
-			return ui.Line({ ui.Span(" "), ui.Span(signs[change]):style(styles[change]) })
+			return ui.Line { ui.Span(" "), ui.Span(signs[change]):style(styles[change]) }
 		end
 	end, opts.order)
 end

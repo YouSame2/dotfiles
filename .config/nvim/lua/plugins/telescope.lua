@@ -120,7 +120,7 @@ return {
 			function()
 				require("telescope.builtin").grep_string()
 			end,
-			desc = "[s]ind current [w]ord",
+			desc = "[s]earch current [w]ord",
 		},
 		{
 			"<leader>ss",

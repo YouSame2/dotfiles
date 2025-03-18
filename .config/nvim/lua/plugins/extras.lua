@@ -8,11 +8,15 @@ return {
 		-- helpgrep with telescope
 		"catgoose/telescope-helpgrep.nvim",
 		lazy = true,
-		init = function()
-			vim.api.nvim_create_user_command("Dosomething", function()
-				require("telescope").extensions.helpgrep.helpgrep() -- Run the extension
-			end, {})
-		end,
+		keys = {
+			{
+				"<leader>sh",
+				function()
+					require("telescope").extensions.helpgrep.helpgrep() -- Run the extension
+				end,
+				desc = "[s]earch [h]elp by grep",
+			},
+		},
 		config = function()
 			require("telescope").load_extension("helpgrep")
 		end,

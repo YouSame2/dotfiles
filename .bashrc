@@ -1,7 +1,7 @@
 # sourcing univeral aliases
 source ~/.config/global-rc/.global-rc
+source ~/.config/global-rc/.env
 source ~/.config/global-rc/.global-aliases
-
 
 ###################
 # inits
@@ -15,11 +15,10 @@ export HISTSIZE=1000
 export HISTFILESIZE=999
 
 shopt -s histappend # do not overwrite history
-shopt -s cmdhist # save multi-line commands in history as single line
+shopt -s cmdhist    # save multi-line commands in history as single line
 
 eval "$(fzf --bash)" # fzf key bindings/fuzzy completion
 eval "$(starship init bash)"
-
 
 ###################
 # aliases
@@ -27,7 +26,6 @@ eval "$(starship init bash)"
 
 # match zsh functions alias
 alias functions='declare -F'
-
 
 ####################
 # binds
@@ -53,7 +51,6 @@ bind '"\e[Z":menu-complete-backward'
 bind '"\C-k": previous-history'
 bind '"\C-j": next-history'
 bind "set completion-ignore-case on" # ignore case in TAB completion
-
 
 ####################
 # Credit and Resources

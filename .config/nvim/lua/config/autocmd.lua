@@ -42,12 +42,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end,
+	group = augroup("resize_splits"),
+	callback = function()
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
 })
 
 -- -- Auto create dir when saving a file, in case some intermediate directory does not exist
@@ -95,3 +95,11 @@ end
 
 vim.api.nvim_create_user_command("ToggleRap", ToggleRap, { desc = "Toggle wrap and keymaps" })
 vim.keymap.set("n", "<leader>uw", "<cmd>ToggleRap<CR>", { desc = "[u]i toggle line [w]rap and movement" })
+
+-- redir output of cmd to scratch buffer. cred: (https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/)
+vim.api.nvim_create_user_command("Redir", function(ctx)
+	local lines = vim.split(vim.api.nvim_exec(ctx.args, true), "\n", { plain = true })
+	vim.cmd("vnew")
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+	vim.opt_local.modified = false
+end, { nargs = "+", complete = "command" })

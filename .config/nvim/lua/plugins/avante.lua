@@ -54,7 +54,6 @@ return {
 		},
 		gemini = {
 			model = "gemini-2.0-flash", -- your desired model (or use gpt-4o, etc.)
-			--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
 		},
 		openai = {
 			endpoint = "https://api.openai.com/v1",

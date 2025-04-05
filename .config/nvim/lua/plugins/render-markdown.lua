@@ -6,6 +6,9 @@ return {
 	---@module 'render-markdown'
 	---@type render.md.UserConfig
 	opts = {
+		heading = {
+			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
+		},
 		file_types = { "markdown", "Avante" },
 		code = {
 			left_margin = 0.05,

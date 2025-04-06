@@ -23,10 +23,12 @@ alias df="df -h"
 
 alias path='echo "$PATH" | tr ":" "\n"'
 
+alias nv="nvim"
 alias nvchad="NVIM_APPNAME=nvchad nvim"
 alias lazyvim="NVIM_APPNAME=lazyvim nvim"
 
 alias cht='"$DOTFILES"/.config/scripts/cht.sh'
+alias ask='"$DOTFILES"/.config/scripts/ask.sh'
 alias gaa='"$DOTFILES"/.config/scripts/gritty.sh' # git add/restore script with fzf
 
 alias so='source'

@@ -100,7 +100,15 @@ return {
 			function()
 				require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
 			end,
-			{ desc = "[F]ind [N]eovim files" },
+			{ desc = "[f]ind [n]eovim files" },
+		},
+
+		{
+			"<leader>fN",
+			function()
+				require("telescope.builtin").find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+			end,
+			desc = "[f]ind [N]eovim plugin files",
 		},
 		{ "<leader>f:", "<cmd>Telescope command_history<cr>", desc = "[f]ind [:]command History" },
 		{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "[f]ind [g]it files" },

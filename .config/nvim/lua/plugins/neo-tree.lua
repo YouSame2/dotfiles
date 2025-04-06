@@ -38,9 +38,9 @@ return {
 			follow_current_file = { enabled = false },
 			use_libuv_file_watcher = true,
 			group_empty_dirs = true,
-			-- filtered_items = {
-			-- visible = true, -- when true, they will just be displayed differently than normal items
-			-- },
+			filtered_items = {
+				visible = true, -- when true, they will just be displayed differently than normal items
+			},
 		},
 		window = {
 			mappings = {

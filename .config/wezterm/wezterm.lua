@@ -132,6 +132,15 @@ config.keys = {
 	{ key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "n", mods = "LEADER", action = act.SpawnWindow },
 	{ key = "n", mods = "SUPER", action = act.SpawnWindow },
+	-- {
+	-- 	key = "p",
+	-- 	mods = "LEADER",
+	-- 	action = act.Multiple({
+	-- 		act.SpawnWindow,
+	-- 		act.SendString("nvim "),
+	-- 		act.SendKey({ key = "t", mods = "CTRL" }),
+	-- 	}),
+	-- },
 	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "t", mods = "SUPER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "m", mods = "LEADER", action = act.TogglePaneZoomState },

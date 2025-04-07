@@ -63,5 +63,16 @@ return {
 			max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
 			--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
 		},
+		windows = {
+			---@type "right" | "left" | "top" | "bottom"
+			position = "right", -- the position of the sidebar
+			wrap = true, -- similar to vim.o.wrap
+			width = 50, -- default % based on available width
+			sidebar_header = {
+				enabled = true, -- true, false to enable/disable the header
+				align = "center", -- left, center, right for title
+				rounded = true,
+			},
+		},
 	},
 }

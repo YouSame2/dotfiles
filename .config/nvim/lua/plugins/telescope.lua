@@ -222,6 +222,13 @@ return {
 					-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
 					find_command = { "rg", "--files", "--hidden", "--glob", "!{**/.git/*,node_modules/*}" }, -- other useful globs: ",.next/*,.svelte-kit/*,target/*"
 				},
+				help_tags = {
+					mappings = {
+						i = {
+							["<CR>"] = require("telescope.actions").select_vertical,
+						},
+					},
+				},
 			},
 		})
 

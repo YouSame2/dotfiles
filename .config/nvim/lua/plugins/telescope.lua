@@ -182,16 +182,25 @@ return {
 		table.insert(vimgrep_arguments, "!**/.git/*")
 
 		telescope.setup({
+
+			--       sorting_strategy = "ascending",
+			--       layout_strategy = "bottom_pane",
+			--       layout_config = {
+			--           height = 25,
+			--         },
+
 			defaults = {
+				defaults = { require("telescope.themes").get_ivy({}) },
 				path_display = { "smart" },
 				prompt_prefix = "   ",
 				selection_caret = " ",
 				entry_prefix = " ",
-				sorting_strategy = "ascending",
 				vimgrep_arguments = vimgrep_arguments,
 				extensions = {
 					fzf = {},
 				},
+				-- DEFAULT THEME STUFF
+				sorting_strategy = "ascending",
 				layout_config = {
 					horizontal = {
 						prompt_position = "top",
@@ -200,6 +209,20 @@ return {
 					width = 0.87,
 					height = 0.80,
 				},
+				-- -- IVY THEME STUFF
+				-- layout_strategy = "bottom_pane",
+				-- sorting_strategy = "descending",
+				-- layout_config = {
+				-- 	preview_width = 0.62,
+				-- 	prompt_position = "bottom",
+				-- 	height = 0.50,
+				-- },
+				-- border = true,
+				-- borderchars = {
+				-- 	prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+				-- 	results = { "─", " ", " ", "│", "╭", "─", " ", " " },
+				-- 	preview = { "─", "│", " ", "│", "─", "╮", "│", "│" },
+				-- },
 				mappings = {
 					n = { ["q"] = actions.close, ["<c-t>"] = open_with_trouble },
 					i = {

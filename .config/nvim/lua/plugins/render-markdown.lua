@@ -2,14 +2,14 @@ return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 	-- event = "VeryLazy",
-	ft = { "markdown", "Avante" },
+	ft = { "markdown", "Avante", "codecompanion" },
 	---@module 'render-markdown'
 	---@type render.md.UserConfig
 	opts = {
 		heading = {
 			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
 		},
-		file_types = { "markdown", "Avante" },
+		file_types = { "markdown", "Avante", "codecompanion" },
 		code = {
 			left_margin = 0.05,
 			left_pad = 2,
@@ -27,6 +27,9 @@ return {
 			},
 			filetype = {
 				Avante = {
+					enabled = true,
+				},
+				codecompanion = {
 					enabled = true,
 				},
 			},

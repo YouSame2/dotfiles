@@ -1,5 +1,6 @@
 return {
 	"yetone/avante.nvim",
+	enabled = false,
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -32,15 +33,6 @@ return {
 		--     },
 		--   },
 		-- },
-		-- {
-		--   -- Make sure to set this up properly if you have lazy=true
-		--   -- i already have plugin setup elsewhere
-		--   'MeanderingProgrammer/render-markdown.nvim',
-		--   opts = {
-		--     file_types = { "markdown", "Avante" },
-		--   },
-		--   ft = { "markdown", "Avante" },
-		-- },
 	},
 	opts = {
 		-- add any opts here
@@ -62,6 +54,10 @@ return {
 			temperature = 0,
 			max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
 			--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+		},
+		cursor_applying_provider = "gemini",
+		behaviour = {
+			enable_cursor_planning_mode = true,
 		},
 		windows = {
 			---@type "right" | "left" | "top" | "bottom"

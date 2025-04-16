@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
-		{ "saghen/blink.compat", version = "*", opts = {} }, -- for avante
+		-- { "saghen/blink.compat", version = "*", opts = {} }, -- for avante
 		{
 			"L3MON4D3/LuaSnip",
 			config = function()
@@ -103,30 +103,34 @@ return {
 				"path",
 				"snippets",
 				"buffer",
-				"avante_commands",
-				"avante_mentions",
-				"avante_files",
+				-- "avante_commands",
+				-- "avante_mentions",
+				-- "avante_files",
 			},
-			providers = {
-				-- below for avante
-				avante_commands = {
-					name = "avante_commands",
-					module = "blink.compat.source",
-					score_offset = 90, -- show at a higher priority than lsp
-					opts = {},
-				},
-				avante_files = {
-					name = "avante_files",
-					module = "blink.compat.source",
-					score_offset = 100, -- show at a higher priority than lsp
-					opts = {},
-				},
-				avante_mentions = {
-					name = "avante_mentions",
-					module = "blink.compat.source",
-					score_offset = 1000, -- show at a higher priority than lsp
-					opts = {},
-				},
+			-- providers = {
+			-- 	-- below for avante
+			-- 	avante_commands = {
+			-- 		name = "avante_commands",
+			-- 		module = "blink.compat.source",
+			-- 		score_offset = 90, -- show at a higher priority than lsp
+			-- 		opts = {},
+			-- 	},
+			-- 	avante_files = {
+			-- 		name = "avante_files",
+			-- 		module = "blink.compat.source",
+			-- 		score_offset = 100, -- show at a higher priority than lsp
+			-- 		opts = {},
+			-- 	},
+			-- 	avante_mentions = {
+			-- 		name = "avante_mentions",
+			-- 		module = "blink.compat.source",
+			-- 		score_offset = 1000, -- show at a higher priority than lsp
+			-- 		opts = {},
+			-- 	},
+			-- },
+			-- below for codecompanion
+			per_filetype = {
+				codecompanion = { "codecompanion" },
 			},
 		},
 

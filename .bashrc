@@ -19,6 +19,8 @@ shopt -s cmdhist    # save multi-line commands in history as single line
 
 eval "$(fzf --bash)" # fzf key bindings/fuzzy completion
 eval "$(starship init bash)"
+eval "$(uv generate-shell-completion bash)"    #auto cmp for uv
+eval "$(uvx --generate-shell-completion bash)" #auto cmp for uvx
 
 ###################
 # aliases

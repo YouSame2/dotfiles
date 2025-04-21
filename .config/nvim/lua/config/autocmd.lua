@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup("last_loc"),
 	callback = function(event)
-		local exclude = { "gitcommit" }
+		local exclude = { "gitcommit", "neo-tree" }
 		local buf = event.buf
 		if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
 			return

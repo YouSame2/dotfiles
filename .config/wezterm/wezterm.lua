@@ -2,8 +2,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("Hack Nerd Font Mono")
+config.font = wezterm.font("Hurmit Nerd Font Mono")
 config.font_size = 13
+-- config.line_height = 1.1
 
 -- sorted fav to least fav
 local themes = {

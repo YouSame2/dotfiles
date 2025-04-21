@@ -2,7 +2,8 @@
 # for Windows only -> add to .bashrc
 # for MacOS only -> add to .zshrc
 
-echo -e "
+if [[ -o interactive ]]; then
+  echo -e "
 \033[1;30m           -..             \033[2;37m:....\033[0m
 \033[2;37m               ...\033[m@@@@@@+ *@\033[2;37m..+.\033[m@+ *@@%%@@.\033[0m
 \033[1;30m-=--:.:-= \033[2;37m:.:...\033[32m:\033[m#@\033[2;37m::---:.\033[m*@@\033[2;37m=..\033[m@\033[2;37m+ :\033[m@\033[2;37m= : :-:\033[1;30m....\033[0m
@@ -11,7 +12,7 @@ echo -e "
 \033[1;30m        .==:.\033[2;37m:.=\033[32m:\033[m*@@@@@@+\033[2;37m.\033[m*@.   \033[m+@ *@@@@@@\033[2;37m.\033[0m
 \033[0;37m                          \033[30mS Lies        \033[1;30m:....\033[0m
 "
-
+fi
 
 # ==================
 # exports
@@ -19,6 +20,8 @@ echo -e "
 
 export DOTFILES=~/Repos/Personal/dotfiles
 export CDPATH=".:/c/Users/Patrick Star/.config" # colon sep list of dirs for 'cd' speed dial like zoxide
+export PATH="/Users/mo/.local/bin:$PATH"        # uv tools
+export LESSHISTFILE=-
 
 # ==================
 # ULTIMATE FZF SETUP!
@@ -54,19 +57,15 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    nvim|vim|nano|code) fzf --preview "bat -n --color=always {}"   "$@" ;;
-    export|unset)       fzf --preview "eval 'echo \$'{}"           "$@" ;;
-    *)                  fzf                                        "$@" ;;
+  nvim | vim | nano | code) fzf --preview "bat -n --color=always {}" "$@" ;;
+  export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
+  *) fzf "$@" ;;
   esac
 }
-
 
 # ==================
 # keybindings
 # ==================
-
-
-
 
 # # add this to my mac:
 # # share history across multiple zsh sessions
@@ -74,6 +73,6 @@ _fzf_comprun() {
 # # append to history
 # setopt APPEND_HISTORY
 # # expire duplicates first
-# setopt HIST_EXPIRE_DUPS_FIRST 
+# setopt HIST_EXPIRE_DUPS_FIRST
 # # removes blank lines from history
 # setopt HIST_REDUCE_BLANKS

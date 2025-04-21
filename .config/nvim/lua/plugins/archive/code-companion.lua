@@ -1,6 +1,6 @@
 return {
 	"olimorris/codecompanion.nvim",
-	enabled = true,
+	enabled = false,
 	lazy = false,
 	dependencies = {
 		"j-hui/fidget.nvim",
@@ -10,9 +10,12 @@ return {
 	-- TODO: change file selector to telescope
 	config = function()
 		require("codecompanion").setup({
+			-- log_level = "DEBUG",
 			display = {
 				chat = {
-					show_settings = true,
+					-- show_settings = true,
+					auto_scroll = false,
+					show_header_separator = true,
 				},
 			},
 			strategies = {
@@ -22,6 +25,27 @@ return {
 				inline = {
 					adapter = "gemini",
 				},
+				cmd = {
+					adapter = "gemini",
+				},
+			},
+			adapters = {
+				gemini = function()
+					return require("codecompanion.adapters").extend("gemini", {
+						name = "gemini_custom", -- Give this adapter a different name to differentiate it from the default ollama adapter
+						schema = {
+							model = {
+								default = "gemini-2.0-flash",
+							},
+							temperature = {
+								default = 1,
+							},
+							topP = {
+								default = 0.95,
+							},
+						},
+					})
+				end,
 			},
 		})
 		vim.keymap.set(

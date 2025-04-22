@@ -1,3 +1,4 @@
 .config/nvchad/
 .config/lazyvim/
 .env
+.aider*

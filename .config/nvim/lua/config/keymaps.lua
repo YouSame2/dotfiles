@@ -25,6 +25,12 @@ end, { desc = "delete all unmodified buffers" })
 
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
+-- TODO: add toggle true/false functionality
+--
+-- Increment/decrement
+-- keymap.set("n", "+", "<C-a>")
+-- keymap.set("n", "-", "<C-x>")
+
 -- =================
 -- ui keymaps
 -- =================
@@ -159,7 +165,10 @@ vim.keymap.set("v", "$", "g$", { desc = "end of the line (include 'wrap')" })
 -- =================
 -- Terminal Mappings
 -- =================
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Exit terminal mode
+-- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 vim.keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

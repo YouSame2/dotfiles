@@ -74,6 +74,26 @@ return {
 					},
 				})
 			end,
+			["pylsp"] = function()
+				lspconfig["pylsp"].setup({
+					on_attach = on_attach_keys,
+					capabilities = capabilities,
+					settings = {
+						pylsp = {
+							plugins = { -- disable all plugins if using ruff
+								pyflakes = { enabled = false },
+								pycodestyle = { enabled = false },
+								autopep8 = { enabled = false },
+								yapf = { enabled = false },
+								mccabe = { enabled = false },
+								pylsp_mypy = { enabled = false },
+								pylsp_black = { enabled = false },
+								pylsp_isort = { enabled = false },
+							},
+						},
+					},
+				})
+			end,
 			-- ["emmet_ls"] = function()
 			--   lspconfig["emmet_ls"].setup({
 			--     capabilities = capabilities,

@@ -10,7 +10,8 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
-			python = { "pylint" },
+			-- NOTE: since ruff is defined as an lsp and i have auto lsp attach settings (see lspconfig) that handles linting. enabling here will produce duplicate lints
+			-- python = { "ruff" },
 			sh = { "shellcheck" },
 		}
 

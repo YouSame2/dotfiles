@@ -62,6 +62,17 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 --   end,
 -- })
 
+-- Auto-insert mode when entering terminal buffer
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("term-auto-insert"),
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "terminal" then
+			vim.cmd("startinsert!")
+		end
+	end,
+})
+
 -- ===========================
 --          USER CMDS
 -- ===========================

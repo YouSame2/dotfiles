@@ -31,6 +31,11 @@ return {
 				-- }
 			end
 
+			-- formatter settings for both mac and windows
+			formatters.ruff = {
+				append_args = { "--extend-select", "I", "--extend-ignore", "F401" }, -- sort imports & ignore unused imports rule
+			}
+
 			return formatters
 		end
 
@@ -54,7 +59,7 @@ return {
 				lua = { "stylua" },
 				bash = { "beautysh" },
 				sh = { "shfmt" },
-				python = { "isort", "black" },
+				python = { "ruff" },
 			},
 			formatters = get_formatters(),
 			format_on_save = {

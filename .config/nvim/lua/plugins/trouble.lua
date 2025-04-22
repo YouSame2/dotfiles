@@ -15,7 +15,7 @@ return {
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "toggle [t]rouble [b]uffer diagnostics",
 		},
-		{ "<leader>ts", "<cmd>Trouble symbols toggle<cr>", desc = "toggle [t]rouble [s]ymbols" },
+		{ "<leader>ts", "<cmd>Trouble symbols toggle win.size=.5<cr>", desc = "toggle [t]rouble [s]ymbols" },
 		{ "<leader>tS", "<cmd>Trouble lsp toggle<cr>", desc = "toggle [t]rouble L[S]P references/definitions/..." },
 		{ "<leader>tl", "<cmd>Trouble loclist toggle<cr>", desc = "toggle [t]rouble [l]ocation list" },
 		{ "<leader>tq", "<cmd>Trouble qflist toggle<cr>", desc = "toggle [t]rouble [q]uickfix list" },

@@ -45,7 +45,8 @@ return {
 			provider_opts = {},
 		},
 		gemini = {
-			model = "gemini-2.0-flash", -- your desired model (or use gpt-4o, etc.)
+			model = "gemini-1.5-flash",
+			-- model = "gemini-2.0-flash", -- your desired model (or use gpt-4o, etc.)
 			temperature = 1,
 		},
 		openai = {

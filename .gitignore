@@ -2,3 +2,4 @@
 .config/lazyvim/
 .env
 .aider*
+**/github-copilot/*

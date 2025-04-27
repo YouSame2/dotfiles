@@ -8,6 +8,7 @@ return {
 		-- helpgrep with telescope
 		"catgoose/telescope-helpgrep.nvim",
 		lazy = true,
+		cond = not vim.g.vscode,
 		keys = {
 			{
 				"<leader>sh",
@@ -24,6 +25,7 @@ return {
 	{
 		-- search common commands with telescope
 		"doctorfree/cheatsheet.nvim",
+		cond = not vim.g.vscode,
 		cmd = "Cheatsheet",
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },

@@ -1,6 +1,7 @@
 return {
-	event = "VeryLazy",
 	"mfussenegger/nvim-lint",
+	event = "VeryLazy",
+	cond = not vim.g.vscode,
 	config = function()
 		local lint = require("lint")
 

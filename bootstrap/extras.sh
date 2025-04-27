@@ -3,8 +3,12 @@
 # insert additional commands to run at the end of bootstrapping below.
 
 # Global extras:
+
+# TODO: add check if the thing is installed
+
 ya pack -a yazi-rs/plugins:git
-uv tool install --with google-generativeai --force --python python3.12 'aider-chat@latest' # installs aider
+# uv tool install --with google-generativeai --force --python python3.12 'aider-chat@latest' # installs aider
+# uv tool install ra-aid # like aider
 
 # Check OS
 OS=$(uname -o)

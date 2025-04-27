@@ -1,6 +1,5 @@
 return {
 	"olimorris/codecompanion.nvim",
-	enabled = false,
 	lazy = false,
 	dependencies = {
 		"j-hui/fidget.nvim",

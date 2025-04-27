@@ -8,7 +8,7 @@ require("config.autocmd")
 -- require "config.autocmds"
 
 vim.schedule(function()
-  require("config.keymaps")
+	require("config.keymaps")
 end)
 
 -- function fix_telescope_parens_win()
@@ -24,5 +24,3 @@ end)
 -- end
 --
 -- fix_telescope_parens_win()
-
-

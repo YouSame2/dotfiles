@@ -93,16 +93,21 @@ vim.opt.fillchars = {
 --   )
 -- end
 
-vim.cmd.colorscheme("default")
-vim.api.nvim_set_hl(0, "LineNr", { fg = "NvimLightBlue" })
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "NvimLightGray3" })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "NvimLightGray3" })
+vim.cmd.colorscheme("Retrobox") -- loved default but after some time relized having good theme really helps quickly understanding code flow...
+vim.api.nvim_set_hl(0, "LineNr", { link = "Identifier" })
+vim.api.nvim_set_hl(0, "LineNrAbove", { link = "Comment" })
+vim.api.nvim_set_hl(0, "LineNrBelow", { link = "Comment" })
+-- old ones used for default colorscheme
+-- vim.api.nvim_set_hl(0, "LineNr", { fg = "NvimLightBlue" })
+-- vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "NvimLightGray3" })
+-- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "NvimLightGray3" })
 -- vim.opt.statusline = statusline() -- old version
 require("utils/statusline")
 
 -- transparency settings
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.diagnostic.config({ float = { border = "rounded" } })
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "rounded",

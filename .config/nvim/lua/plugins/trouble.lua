@@ -1,6 +1,7 @@
 return {
 	"folke/trouble.nvim",
 	cmd = { "Trouble" },
+	cond = not vim.g.vscode,
 	opts = {
 		modes = {
 			lsp = {

@@ -1,5 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-context",
+	cond = not vim.g.vscode,
 	event = "VeryLazy",
 	config = function()
 		require("treesitter-context").setup({

@@ -81,4 +81,6 @@ end
 
 UpdateBufferCache()
 CreateCustomHighlight() -- Ensure the highlight group is updated dynamically
-vim.opt.statusline = "%!v:lua.Statusline()"
+if not vim.g.vscode then
+	vim.opt.statusline = "%!v:lua.Statusline()"
+end

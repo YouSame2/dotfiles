@@ -1,5 +1,6 @@
 return {
 	event = "VeryLazy",
+	cond = not vim.g.vscode,
 	"sphamba/smear-cursor.nvim",
 	opts = { -- Default  Range
 		stiffness = 0.9, -- 0.6      [0, 1]

@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.nvim",
-	version = "*",
+	version = false,
 	event = "VeryLazy",
 	config = function()
 		-- MINI.COMMENT
@@ -40,6 +40,7 @@ return {
 			-- },
 		}
 		require("mini.ai").setup({
+			-- search_method = "cover", -- vib will select the brack u are currently in vinb will do next bracket
 			mappings = {
 				goto_left = "", -- disabling cuz dont like this functionality
 				goto_right = "",

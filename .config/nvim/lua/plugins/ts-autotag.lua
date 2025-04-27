@@ -1,11 +1,12 @@
 return {
-  "windwp/nvim-ts-autotag",
-  ft = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-  },
-  opts = {},
+	"windwp/nvim-ts-autotag",
+	cond = not vim.g.vscode,
+	ft = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"html",
+	},
+	opts = {},
 }

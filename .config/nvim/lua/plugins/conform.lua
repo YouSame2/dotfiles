@@ -1,6 +1,7 @@
 -- credit: github.com/josean-dev
 return {
 	"stevearc/conform.nvim",
+	cond = not vim.g.vscode,
 	dependencies = { "mason.nvim" },
 	event = "VeryLazy",
 	config = function()

@@ -1,5 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
+	cond = not vim.g.vscode,
 	event = "VeryLazy",
 
 	-- NOTE: order must go: mason, mason-lspconfig, blink, then lspconfig

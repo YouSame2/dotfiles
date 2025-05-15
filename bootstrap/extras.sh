@@ -27,5 +27,7 @@ if [[ "$OS" =~ Cygwin|Msys|MinGW ]]; then
   echo 'installing/upgrading yazi' && winget install sxyazi.yazi
 
 # mac part
-# elif [[ "$OS" = Darwin ]]; then
+elif [[ "$OS" = Darwin ]]; then
+  # TODO: add windows part of this
+  sudo curl -sSL https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/git-jump/git-jump -o /usr/local/bin/git-jump && sudo chmod +x /usr/local/bin/git-jump
 fi

@@ -2,12 +2,16 @@
 
 -- Hl group for active buffer name
 function CreateCustomHighlight()
-	local line_nr_fg = vim.api.nvim_get_hl_by_name("LineNr", true).foreground
-	local tabline_bg = vim.api.nvim_get_hl_by_name("TabLine", true).background
+	-- NOTE: old colors for default theme.
 
-	if line_nr_fg and tabline_bg then
-		vim.cmd(string.format("highlight MyActiveBuffer guifg=#%06x guibg=#%06x gui=bold", line_nr_fg, tabline_bg))
-	end
+	-- local line_nr_fg = vim.api.nvim_get_hl_by_name("LineNr", true).foreground
+	-- local tabline_bg = vim.api.nvim_get_hl_by_name("TabLine", true).background
+
+	-- if line_nr_fg and tabline_bg then
+	-- 	vim.cmd(string.format("highlight MyActiveBuffer guifg=#%06x guibg=#%06x gui=bold", line_nr_fg, tabline_bg))
+	-- end
+
+	vim.api.nvim_set_hl(0, "MyActiveBuffer", { link = "PmenuSel" })
 end
 
 local buffer_cache = {}
@@ -41,7 +45,7 @@ function MyBufferline()
 
 		-- Highlight the active buffer
 		if buf == current_buf then
-			return "%#MyActiveBuffer#" .. name .. "%#TabLine#"
+			return "%#MyActiveBuffer#" .. name .. "%#StatuslineNC#"
 		else
 			return name
 		end
@@ -56,7 +60,7 @@ function MyBufferline()
 end
 
 function Statusline()
-	local set_color_2 = "%#TabLine#"
+	local set_color_2 = "%#StatuslineNC#"
 	local truncation = "%>"
 	local align_right = "%="
 	local fileencoding = " %{&fileencoding?&fileencoding:&encoding}"

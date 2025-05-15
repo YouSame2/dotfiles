@@ -14,7 +14,6 @@ return {
 		--- The below dependencies are optional,
 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-		-- TODO: setup copilot
 		-- "zbirenbaum/copilot.lua", -- for providers='copilot'
 		-- {
 		--   -- support for image pasting

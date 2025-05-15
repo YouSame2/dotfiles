@@ -6,7 +6,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
-	-- TODO: change file selector to telescope
 	config = function()
 		require("codecompanion").setup({
 			-- log_level = "DEBUG",

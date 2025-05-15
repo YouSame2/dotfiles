@@ -25,11 +25,27 @@ end, { desc = "delete all unmodified buffers" })
 
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
--- TODO: add toggle true/false functionality
---
--- Increment/decrement
--- keymap.set("n", "+", "<C-a>")
--- keymap.set("n", "-", "<C-x>")
+-- Increment/decrement and toggle boolean
+vim.keymap.set("n", "-", function()
+	local word = vim.fn.expand("<cword>")
+	if word == "true" then
+		vim.cmd("normal! ciwfalseb")
+	elseif word == "false" then
+		vim.cmd("normal! ciwtrueb")
+	else
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-x>", true, true, true), "n", false)
+	end
+end, { desc = "decrement or toggle bool" })
+vim.keymap.set("n", "+", function()
+	local word = vim.fn.expand("<cword>")
+	if word == "true" then
+		vim.cmd("normal! ciwfalseb")
+	elseif word == "false" then
+		vim.cmd("normal! ciwtrueb")
+	else
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-a>", true, true, true), "n", false)
+	end
+end, { desc = "increment or toggle bool" })
 
 -- =================
 -- ui keymaps
@@ -111,7 +127,7 @@ vim.keymap.set({ "v", "!", "t" }, "<C-S-c>", [["+y]], { desc = "y to system cb" 
 vim.keymap.set("n", "<C-S-c><C-S-c>", [["+Y]], { desc = "yy to system cb" })
 vim.keymap.set("n", "<C-S-c>", [["+y]], { desc = "Y to system cb" })
 vim.keymap.set({ "n", "v" }, "<C-S-v>", [["+p]], { desc = "p from system cb" })
-vim.keymap.set({ "!", "t" }, "<C-S-v>", [[<C-r>+]], { desc = "p from keep cb" })
+vim.keymap.set({ "!", "t" }, "<C-S-v>", [[<C-r>+]], { desc = "p from system cb" })
 vim.keymap.set({ "v" }, "<leader><C-S-v>", [["_d"+P]], { desc = "P from system cb over selection, keep p reg" })
 
 vim.keymap.set("n", "gco", 'o<esc>V"_cx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = "Add Comment Below" })

@@ -14,6 +14,7 @@ return {
 	config = function()
 		-- Diagnostics {{{
 		local diagnostic_config = {
+			virtual_text = true,
 			signs = {
 				text = {
 					[vim.diagnostic.severity.ERROR] = "",

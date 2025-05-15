@@ -1,5 +1,6 @@
 return {
 	"joshuavial/aider.nvim",
+	enabled = false,
 	cond = not vim.g.vscode,
 	cmd = { "AiderOpen", "AiderAddModifiedFiles" },
 	keys = {

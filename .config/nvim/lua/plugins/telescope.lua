@@ -114,7 +114,7 @@ return {
 		{ "<leader>f:", "<cmd>Telescope command_history<cr>", desc = "[f]ind [:]command History" },
 		{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "[f]ind [g]it files" },
 		{ "<leader>fgc", "<cmd>Telescope git_commits<CR>", desc = "[f]ind [g]it [c]ommits" },
-		{ "<leader>fgs", "<cmd>Telescope git_status<CR>", desc = "[f]ind [g]it [s]tatus" },
+		-- { "<leader>fgs", "<cmd>Telescope git_status<CR>", desc = "[f]ind [g]it [s]tatus" }, -- using my extension instead
 		{ '<leader>f"', "<cmd>Telescope registers<cr>", desc = "[f]ind registers" },
 		-- GREP KEYMAPS
 		{

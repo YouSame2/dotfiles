@@ -23,6 +23,25 @@ return {
 		end,
 	},
 	{
+		-- my custom telescope git diff extension
+		"YouSame2/telescope-git-diff",
+		lazy = true,
+		cond = not vim.g.vscode,
+    cmd = "Telescope git_diff",
+		keys = {
+			{
+				"<leader>fgs",
+				function()
+					require("telescope").extensions.git_diff.git_diff()
+				end,
+				desc = "todo",
+			},
+		},
+		config = function()
+			require("telescope").load_extension("git_diff")
+		end,
+	},
+	{
 		-- search common commands with telescope
 		"doctorfree/cheatsheet.nvim",
 		cond = not vim.g.vscode,

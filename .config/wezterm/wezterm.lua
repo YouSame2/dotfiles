@@ -180,9 +180,9 @@ config.keys = {
 	{ key = "8", mods = "LEADER", action = act.ActivateTab(7) },
 	{ key = "9", mods = "LEADER", action = act.ActivateTab(-1) },
 
-	{ key = "=", mods = "CTRL|LEADER", action = act.IncreaseFontSize },
-	{ key = "-", mods = "CTRL|LEADER", action = act.DecreaseFontSize },
-	{ key = "0", mods = "CTRL|LEADER", action = act.ResetFontSize },
+	{ key = "=", mods = "LEADER", action = act.IncreaseFontSize },
+	{ key = "-", mods = "LEADER", action = act.DecreaseFontSize },
+	{ key = "0", mods = "LEADER", action = act.ResetFontSize },
 	{ key = " ", mods = "CTRL", action = wezterm.action.SendKey({ key = " ", mods = "CTRL" }) }, -- windows ctrl-space fix
 	{ key = " ", mods = "CTRL|SHIFT", action = wezterm.action.SendKey({ key = " ", mods = "CTRL|SHIFT" }) }, -- windows ctrl-shift-space fix
 }

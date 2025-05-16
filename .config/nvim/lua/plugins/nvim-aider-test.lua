@@ -1,5 +1,6 @@
 return {
 	dir = "~/Repos/Personal/nvim-aider",
+	enabled = false,
 	cmd = "Aider",
 	name = "Aider",
 	dependencies = {

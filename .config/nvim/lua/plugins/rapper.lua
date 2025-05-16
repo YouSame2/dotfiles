@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	dir = "~/Repos/Personal/rapper.nvim",
 	-- lazy = false,
 	cmd = "Testy",

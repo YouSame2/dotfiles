@@ -39,7 +39,7 @@ export FZF_DEFAULT_OPTS='--info inline-right --border-label "| NVIM btw |" --hei
 export FZF_COMPLETION_OPTS='--border-label "| COMPLETION MODE - NVIM btw |"'
 # changing default CTRL-* commands
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type dir"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d . ~" # change start dir to ~
 export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview='' --border-label '| CD MODE - NVIM btw |'"
 export FZF_CTRL_R_OPTS="$FZF_DEFAULT_OPTS --preview='' --border-label '| CMD HISTORY MODE - NVIM btw |'"
 

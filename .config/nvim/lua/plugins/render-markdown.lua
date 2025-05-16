@@ -1,5 +1,6 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
+	cond = not vim.g.vscode,
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 	-- event = "VeryLazy",
 	ft = { "markdown", "Avante", "codecompanion" },

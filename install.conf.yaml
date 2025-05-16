@@ -9,6 +9,10 @@
       if: "[ `uname` != Darwin ]"
     ~/.bashrc:
       path: .bashrc
+    ~/.aider.conf.yml:
+      path: .aider.conf.yml
+    ~/.zshrc:
+      path: .zshrc
 - clean: ["~"]
 # - shell:
 #     - [git submodule update --init --recursive, Installing submodules]

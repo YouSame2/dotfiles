@@ -1,0 +1,18 @@
+dark-mode: true
+cache-prompts: true
+# restore-chat-history: true # not good. /clear only clears for current sesson. next launch all history is restored.
+auto-commits: false
+# watch-files: true
+# analytics-disable: true # only needed first launch
+vim: true
+# multiline: true
+
+#################################
+# model dependent settings. use 1
+#################################
+
+# model: gemini/gemini-2.0-flash
+
+#################################
+model: gemini/gemini-2.5-flash-preview-04-17
+# edit-format: diff # [whole diff diff-fenced udiff]

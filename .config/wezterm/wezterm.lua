@@ -2,7 +2,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("Hurmit Nerd Font Mono")
+config.font = wezterm.font("Hurmit Nerd Font Mono", { weight = "DemiBold" })
 config.font_size = 13
 -- config.line_height = 1.1
 

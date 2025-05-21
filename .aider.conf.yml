@@ -3,7 +3,7 @@ cache-prompts: true
 # restore-chat-history: true # not good. /clear only clears for current sesson. next launch all history is restored.
 auto-commits: false
 # watch-files: true
-# analytics-disable: true # only needed first launch
+analytics-disable: true # only needed first launch
 vim: true
 # multiline: true
 

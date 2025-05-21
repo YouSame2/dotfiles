@@ -9,6 +9,10 @@ return {
 		"catgoose/telescope-helpgrep.nvim",
 		lazy = true,
 		cond = not vim.g.vscode,
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
 		keys = {
 			{
 				"<leader>sh",
@@ -25,16 +29,19 @@ return {
 	{
 		-- my custom telescope git diff extension
 		"YouSame2/telescope-git-diff",
-		lazy = true,
 		cond = not vim.g.vscode,
-    cmd = "Telescope git_diff",
+		cmd = "Telescope git_diff",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
 		keys = {
 			{
 				"<leader>fgs",
 				function()
 					require("telescope").extensions.git_diff.git_diff()
 				end,
-				desc = "todo",
+				desc = "find git status",
 			},
 		},
 		config = function()

@@ -94,6 +94,10 @@ function y() {
   rm -f -- "$tmp"
 }
 
+help() {
+  "$@" --help | bat --language=help --style=plain --color=always
+}
+
 # extract based on extension: https://gitlab.com/dwt1/dotfiles/-/blob/master/.bashrc?ref_type=heads
 # function ex {
 #  if [ -z "$1" ]; then

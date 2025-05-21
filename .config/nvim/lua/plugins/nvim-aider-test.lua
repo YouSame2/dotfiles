@@ -1,14 +1,22 @@
 return {
 	dir = "~/Repos/Personal/nvim-aider",
-	enabled = false,
+	-- enabled = false,
 	cmd = "Aider",
-	name = "Aider",
-	dependencies = {
-		"folke/snacks.nvim",
-		--- The below dependencies are optional
-		-- "catppuccin/nvim",
-		-- "nvim-tree/nvim-tree.lua",
+	keys = {
+		{ "<leader>aa", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
+		{ "<leader>a<Tab>", "<cmd>Aider command<cr>", desc = "Aider Commands" },
+		{ "<leader>ab", "<cmd>Aider buffer<cr>", desc = "Send Buffer" },
+		{ "<leader>a+", "<cmd>Aider add<cr>", desc = "Add File" },
+		{ "<leader>a-", "<cmd>Aider drop<cr>", desc = "Drop File" },
+		{ "<leader>ar", "<cmd>Aider add readonly<cr>", desc = "Add Read-Only" },
 	},
+	name = "Aider",
+	-- dependencies = {
+	-- 	"folke/snacks.nvim",
+	-- 	--- The below dependencies are optional
+	-- 	-- "catppuccin/nvim",
+	-- 	-- "nvim-tree/nvim-tree.lua",
+	-- },
 	opts = {
 		auto_reload = true,
 		-- default colors have syntax highlighting for code
@@ -27,5 +35,6 @@ return {
 			width = 0.5,
 		},
 		picker = "telescope",
+		terminal_emulator = "nvim",
 	},
 }

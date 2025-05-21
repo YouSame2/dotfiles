@@ -5,7 +5,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
-
+		cond = not vim.g.vscode,
 		config = function()
 			local mason = require("mason")
 			-- enable mason and configure icons
@@ -26,6 +26,7 @@ return {
 
 	{
 		"williamboman/mason-lspconfig.nvim",
+		cond = not vim.g.vscode,
 		dependencies = {
 			"williamboman/mason.nvim",
 		},
@@ -60,6 +61,7 @@ return {
 			"williamboman/mason.nvim",
 		},
 		event = "VeryLazy",
+		cond = not vim.g.vscode,
 		-- lazy = false,
 		config = function()
 			local mason_tool_installer = require("mason-tool-installer")

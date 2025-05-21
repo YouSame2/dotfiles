@@ -9,6 +9,9 @@ require("config.autocmd")
 
 vim.schedule(function()
 	require("config.keymaps")
+	if vim.g.vscode then
+		require("config.vscode")
+	end
 end)
 
 -- function fix_telescope_parens_win()

@@ -231,7 +231,7 @@ local function set_diff_highlights()
 end
 set_diff_highlights()
 vim.api.nvim_create_autocmd("ColorScheme", {
-	group = vim.api.nvim_create_augroup("DiffColors", { clear = true }),
+	group = vim.api.nvim_create_augroup("my_diff_colors", { clear = true }),
 	callback = set_diff_highlights,
 })
 

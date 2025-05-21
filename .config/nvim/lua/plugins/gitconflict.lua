@@ -1,5 +1,6 @@
 return {
 	"akinsho/git-conflict.nvim",
+	cond = not vim.g.vscode,
 	version = "*",
 	event = "VeryLazy",
 	keys = {
@@ -25,7 +26,7 @@ return {
 			list_opener = "copen", -- command or function to open the conflicts list
 			highlights = { -- They must have background color, otherwise the default color will be used
 				incoming = "DiffAdd",
-				current = "DiffText",
+				current = "DiffChange",
 			},
 		})
 

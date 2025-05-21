@@ -35,46 +35,47 @@ return {
 			-- setup mason-lspconfig
 			mason_lspconfig.setup({
 				automatic_installation = false,
-				-- ensure_installed = { -- bootstrap: uncomment on first run
-				-- "lua_ls",
-				-- "ts_ls",
-				-- "html",
-				-- "bashls",
-				-- "pylsp",
-				-- -- "cssls",
-				-- -- "tailwindcss",
-				-- -- "svelte",
-				-- -- "graphql",
-				-- -- "emmet_ls",
-				-- -- "prismals",
-				-- -- "pyright",
-				--  },
+				ensure_installed = { -- bootstrap: uncomment on first run
+					"lua_ls",
+					"ts_ls",
+					"html",
+					"bashls",
+					"pylsp",
+					-- "cssls",
+					-- "tailwindcss",
+					-- "svelte",
+					-- "graphql",
+					-- "emmet_ls",
+					-- "prismals",
+					-- "pyright",
+				},
 			})
 		end,
 	},
 
-	-- -- bootstrap: uncomment on first run
-	-- {
-	--   "WhoIsSethDaniel/mason-tool-installer.nvim",
-	--   dependencies = {
-	--     "williamboman/mason.nvim",
-	--   },
-	--   lazy = false,
-	--   config = function()
-	--     local mason_tool_installer = require("mason-tool-installer")
-	--     mason_tool_installer.setup({
-	--       ensure_installed = {
-	--         "prettier",
-	--         "stylua",
-	--         "shellcheck",
-	--         "shfmt",
-	--         "ruff",
-	--         -- "isort",
-	--         -- "black",
-	--         -- "pylint",
-	--         {'eslint_d', version = '13.1.2'}, -- v14.0.3 is bugged stick with this till fix
-	--       },
-	--     })
-	--   end,
-	-- },
+	-- bootstrap: uncomment on first run
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+		},
+		event = "VeryLazy",
+		-- lazy = false,
+		config = function()
+			local mason_tool_installer = require("mason-tool-installer")
+			mason_tool_installer.setup({
+				ensure_installed = {
+					"prettier",
+					"stylua",
+					"shfmt",
+					"ruff",
+					-- "shellcheck",
+					-- "isort",
+					-- "black",
+					-- "pylint",
+					{ "eslint_d", version = "13.1.2" }, -- v14.0.3 is bugged stick with this till fix
+				},
+			})
+		end,
+	},
 }

@@ -60,7 +60,7 @@ return {
 				lua = { "stylua" },
 				bash = { "beautysh" },
 				sh = { "shfmt" },
-				python = { "ruff" },
+				python = { "ruff_format" },
 			},
 			formatters = get_formatters(),
 			format_on_save = {

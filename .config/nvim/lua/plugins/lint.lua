@@ -11,7 +11,7 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			svelte = { "eslint_d" },
-			-- python = { "ruff" }, -- NOTE: since ruff is defined as an lsp and i have auto lsp attach settings (see lspconfig) that handles linting. enabling here will produce duplicate lints
+			-- python = { "ruff" }, -- NOTE: ruff is an lsp. conform runs ruff formatter and linter from my testing. enabling here will produce duplicate lints
 			-- sh = { "shellcheck" }, -- NOTE: bashls includes shellcheck. enabling will produce duplicate diagnostics
 		}
 

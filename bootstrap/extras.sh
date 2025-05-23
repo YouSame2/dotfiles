@@ -32,7 +32,15 @@ if [[ "$OS" =~ Cygwin|Msys|MinGW ]]; then
   }
   command -v uv >/dev/null || {
     echo 'installing uv...'
-    winget install --id=astral-sh.uv -e
+    winget install --exact --id=astral-sh.uv
+  }
+  command -v docker >/dev/null || {
+    echo 'installing docker...'
+    winget install --exact --id Docker.DockerDesktop
+  }
+  command -v ollama >/dev/null || {
+    echo 'installing ollama...'
+    winget install --exact --id Ollama.Ollama
   }
 
 # mac part

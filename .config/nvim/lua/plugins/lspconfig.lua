@@ -1,7 +1,8 @@
 return {
 	"neovim/nvim-lspconfig",
 	cond = not vim.g.vscode,
-	event = "VeryLazy",
+	lazy = false,
+	-- event = "VeryLazy",
 
 	-- NOTE: order must go: mason, mason-lspconfig, blink, then lspconfig
 	dependencies = {
@@ -107,6 +108,61 @@ return {
 		}
 
 		-- Python
+
+		-- HACK: IMPORTANT this will save you days of pain. i spent a day trying to figure out how to get venvs to automatically activate in python files. without it venv library imports do not properly function. this will automatically detect venvs and fix the stupid import problem for venv libraries. no need for plugin, no need to activate venv everytime. enjoy!
+
+		-- TODO: maybe move these to autocmd?
+
+		-- Check if the current file is inside a Git repository
+		local function is_git_repo()
+			vim.fn.system("git rev-parse --is-inside-work-tree")
+			return vim.v.shell_error == 0
+		end
+
+		-- Get the Git root directory
+		local function get_git_root()
+			local dot_git_path = vim.fn.finddir(".git", ".;")
+			return vim.fn.fnamemodify(dot_git_path, ":h")
+		end
+
+		-- Detect the appropriate Python path from a virtual environment in the project root
+		local function detect_venv_path()
+			local base_dir = is_git_repo() and get_git_root() or vim.fn.getcwd()
+			local candidates = { ".venv", "venv", "env" }
+
+			for _, name in ipairs(candidates) do
+				local python = base_dir .. "/" .. name .. "/bin/python"
+				if vim.fn.executable(python) == 1 then
+					return python
+				end
+			end
+
+			return ".venv/bin/python" -- default location for uv
+		end
+
+		vim.lsp.config.pyright = {
+			settings = {
+				pyright = {
+					disableOrganizeImports = true, -- Using Ruff's import organizer
+				},
+				python = {
+					pythonPath = detect_venv_path(),
+					analysis = {
+						ignore = { "*" }, -- Ignore all files for analysis to exclusively use Ruff for linting
+					},
+				},
+			},
+			-- on_attach = function(args)
+			-- 	local client = vim.lsp.get_client_by_id(args.data.client_id)
+			-- 	if client == nil then
+			-- 		return
+			-- 	end
+			-- 	if client.name == "ruff" then
+			-- 		-- Disable hover in favor of LSP
+			-- 		client.server_capabilities.hoverProvider = false
+			-- 	end
+			-- end,
+		}
 		vim.lsp.config.pylsp = {
 			settings = {
 				pylsp = {
@@ -122,6 +178,16 @@ return {
 					},
 				},
 			},
+			-- on_attach = function(args)
+			-- 	local client = vim.lsp.get_client_by_id(args.data.client_id)
+			-- 	if client == nil then
+			-- 		return
+			-- 	end
+			-- 	if client.name == "ruff" then
+			-- 		-- Disable hover in favor of LSP
+			-- 		client.server_capabilities.hoverProvider = false
+			-- 	end
+			-- end,
 		}
 
 		-- }}}

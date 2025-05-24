@@ -116,7 +116,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				-- Fallback: relative to whatever root Pyright picks up, if not found global python will be used
 				local fallback = ".venv/" .. python_file
 				vim.schedule(function()
-					vim.notify("Fallback to default pythonPath: " .. fallback)
+					vim.notify("Python venv NOT found. fallback to default venv pythonPath: " .. fallback)
 				end)
 				return fallback
 			end

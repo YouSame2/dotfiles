@@ -21,6 +21,9 @@ return {
 				formatters.shfmt = {
 					command = mason_dir .. "shfmt.cmd",
 				}
+				formatters.ruff_format = {
+					command = mason_dir .. "ruff.cmd",
+				}
 				-- formatters.prettier = {
 				-- 	command = mason_dir .. "prettier.cmd",
 				-- }

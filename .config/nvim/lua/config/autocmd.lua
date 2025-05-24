@@ -73,6 +73,63 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+-- HACK: IMPORTANT this will save you days of pain. i spent a day trying to figure out how to get venvs to automatically activate in python files. without it venv library imports do not properly function. this will automatically detect venvs and fix the stupid import problem for venv libraries. no need for plugin, no need to activate venv everytime. enjoy!
+
+-- Set pythonPath when Pyright attaches to a buffer, for venv packages to work properly
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = augroup("venv-python-path"),
+	callback = function(args)
+		if vim.g.my_pythonPath then
+			return
+		end
+
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client.name == "pyright" then
+			-- get Git root directory
+			local function get_git_root()
+				local dot_git_path = vim.fn.finddir(".git", ".;")
+				if dot_git_path == "" then
+					return nil
+				end
+				return vim.fn.fnamemodify(dot_git_path, ":h")
+			end
+
+			-- detect the virtual environment path
+			local function detect_venv_path()
+				local is_windows = vim.loop.os_uname().version:match("Windows")
+				local python_file = is_windows and "Scripts/python" or "bin/python"
+				local candidates = { ".venv", "venv", "env" }
+				local git_root = get_git_root()
+
+				if git_root then
+					for _, name in ipairs(candidates) do
+						local python = git_root .. "/" .. name .. "/" .. python_file
+						if vim.fn.executable(python) == 1 then
+							vim.schedule(function()
+								vim.notify("Python venv found. Set LSP pythonPath as:\n" .. python)
+							end)
+							return python
+						end
+					end
+				end
+
+				-- Fallback: relative to whatever root Pyright picks up, if not found global python will be used
+				local fallback = ".venv/" .. python_file
+				vim.schedule(function()
+					vim.notify("Fallback to default pythonPath: " .. fallback)
+				end)
+				return fallback
+			end
+
+			-- set pythonPath in lsp
+			local python_path = detect_venv_path()
+			client.config.settings.python.pythonPath = python_path
+			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+			vim.g.my_pythonPath = true
+		end
+	end,
+})
+
 -- ===========================
 --          USER CMDS
 -- ===========================

@@ -120,10 +120,12 @@ end, { remap = true, expr = true, desc = "goto mark & center" })
 -- better copy, paste, yank
 -- =================
 -- recommend using these copy/paste rather than terminals, there better. :D
+vim.keymap.set("v", "y", "mzy`z", { desc = "y selection, keep cursor position" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "P over selection keep p reg" })
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "d over selection keep p reg" })
 vim.keymap.set({ "n", "v" }, "<leader>D", '"_D', { desc = "D over selection keep p reg" })
-vim.keymap.set({ "v", "!", "t" }, "<C-S-c>", [["+y]], { desc = "y to system cb" })
+vim.keymap.set({ "v" }, "<C-S-c>", [[mz"+y`z]], { desc = "y to system cb, keep cursor position" })
+vim.keymap.set({ "!", "t" }, "<C-S-c>", [["+y]], { desc = "y to system cb" })
 vim.keymap.set("n", "<C-S-c><C-S-c>", [["+Y]], { desc = "yy to system cb" })
 vim.keymap.set("n", "<C-S-c>", [["+y]], { desc = "Y to system cb" })
 vim.keymap.set({ "n", "v" }, "<C-S-v>", [["+p]], { desc = "p from system cb" })
@@ -187,3 +189,23 @@ vim.keymap.set("v", "$", "g$", { desc = "end of the line (include 'wrap')" })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+vim.keymap.set("t", "<C-w><C-w>", "<C-\\><C-n>:wincmd w<CR>", { silent = true, desc = "Switch window (terminal mode)" })
+vim.keymap.set(
+	"t",
+	"<C-w>h",
+	"<C-\\><C-n>:wincmd h<CR>",
+	{ silent = true, desc = "Switch window left (terminal mode)" }
+)
+vim.keymap.set(
+	"t",
+	"<C-w>l",
+	"<C-\\><C-n>:wincmd l<CR>",
+	{ silent = true, desc = "Switch window right (terminal mode)" }
+)
+vim.keymap.set("t", "<C-w>k", "<C-\\><C-n>:wincmd k<CR>", { silent = true, desc = "Switch window up (terminal mode)" })
+vim.keymap.set(
+	"t",
+	"<C-w>j",
+	"<C-\\><C-n>:wincmd j<CR>",
+	{ silent = true, desc = "Switch window down (terminal mode)" }
+)

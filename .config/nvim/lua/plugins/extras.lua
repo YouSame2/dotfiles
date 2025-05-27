@@ -7,7 +7,6 @@ return {
 	{
 		-- helpgrep with telescope
 		"catgoose/telescope-helpgrep.nvim",
-		lazy = true,
 		cond = not vim.g.vscode,
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },
@@ -24,6 +23,30 @@ return {
 		},
 		config = function()
 			require("telescope").load_extension("helpgrep")
+		end,
+	},
+	{
+		-- Telescope UI select
+		"nvim-telescope/telescope-ui-select.nvim",
+		cond = not vim.g.vscode,
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+		keys = {
+			{
+				"<leader>ca",
+				vim.lsp.buf.code_action,
+				desc = "[c]ode [a]ction",
+			},
+		},
+		config = function()
+			local telescope = require("telescope")
+			telescope.extensions = telescope.extensions or {}
+			telescope.extensions["ui-select"] = {
+				require("telescope.themes").get_dropdown({}),
+			}
+			require("telescope").load_extension("ui-select")
 		end,
 	},
 	{

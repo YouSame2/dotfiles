@@ -72,7 +72,7 @@ return {
 					opts("[g]oto [t]ype definition")
 				)
 				vim.keymap.set("n", "<leader>gT", vim.lsp.buf.type_definition, opts("[g]oto [T]ype definition"))
-				vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("[c]ode [a]ction"))
+				-- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("[c]ode [a]ction")) -- using telescope UI select @ ./extras.lua
 				vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts("smart [c]ode [r]ename"))
 				vim.keymap.set(
 					"n",

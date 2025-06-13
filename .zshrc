@@ -22,6 +22,11 @@ eval "$(uvx --generate-shell-completion zsh)"
 
 # bindkey -r "^[c" # remove default cd bind. must do before 👇🏼
 source <(fzf --zsh)
+#######################
+# opts
+#######################
+
+setopt histignorespace
 
 #######################
 # aliases

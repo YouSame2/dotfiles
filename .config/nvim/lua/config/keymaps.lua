@@ -138,47 +138,51 @@ vim.keymap.set("n", "gcO", 'O<esc>V"_cx<esc><cmd>normal gcc<cr>fxa<bs>', { desc 
 -- =================
 -- line wrap keymaps
 -- =================
-vim.keymap.set(
-	"n",
-	"j",
-	"v:count == 0 ? 'gj' : 'j'",
-	{ expr = true, desc = "cursor N lines downward (include 'wrap')" }
-)
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "cursor N lines up (include 'wrap')" })
-vim.keymap.set("n", "0", "g0", { desc = "first char of the line (include 'wrap')" })
-vim.keymap.set("n", "^", "g^", { desc = "first non-blank character of the line (include 'wrap')" })
-vim.keymap.set("n", "$", "g$", { desc = "end of the line (include 'wrap')" })
----------------
--- NOTE: below changes behavior of Y,D,C to respect line wrap. comment out to have normal behavior. keep in mind you can still achive the same normal behavior just by double tapping. i.e. 'yy' or 'dd'
-vim.keymap.set(
-	"n",
-	"D",
-	"v:count == 0 ? 'dg$' : 'D'",
-	{ expr = true, desc = "[D]elete to end of line (include 'wrap')" }
-)
-vim.keymap.set(
-	"n",
-	"C",
-	"v:count == 0 ? 'cg$' : 'C'",
-	{ expr = true, desc = "[C]hange to end of line (include 'wrap')" }
-)
-vim.keymap.set(
-	"n",
-	"Y",
-	"v:count == 0 ? 'yg$' : 'y$'",
-	{ expr = true, desc = "[Y]ank to end of line (include 'wrap')" }
-)
----------------
-vim.keymap.set(
-	"v",
-	"j",
-	"v:count == 0 ? 'gj' : 'j'",
-	{ expr = true, desc = "cursor N lines downward (include 'wrap')" }
-)
-vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "cursor N lines up (include 'wrap')" })
-vim.keymap.set("v", "0", "g0", { desc = "first char of the line (include 'wrap')" })
-vim.keymap.set("v", "^", "g^", { desc = "first non-blank character of the line (include 'wrap')" })
-vim.keymap.set("v", "$", "g$", { desc = "end of the line (include 'wrap')" })
+if not vim.g.vscode then -- vscode is werid...
+	vim.keymap.set(
+		"n",
+		"j",
+		"v:count == 0 ? 'gj' : 'j'",
+		{ expr = true, desc = "cursor N lines downward (include 'wrap')" }
+	)
+	vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "cursor N lines up (include 'wrap')" })
+	vim.keymap.set("n", "0", "g0", { desc = "first char of the line (include 'wrap')" })
+	vim.keymap.set("n", "^", "g^", { desc = "first non-blank character of the line (include 'wrap')" })
+	vim.keymap.set("n", "$", "g$", { desc = "end of the line (include 'wrap')" })
+	vim.keymap.set("n", "I", "g^i", { remap = true, desc = "I (include 'wrap')" })
+	vim.keymap.set("n", "A", "g$a", { remap = true, desc = "A (include 'wrap')" })
+	---------------
+	-- NOTE: below changes behavior of Y,D,C to respect line wrap. comment out to have normal behavior. keep in mind you can still achive the same normal behavior just by double tapping. i.e. 'yy' or 'dd'
+	vim.keymap.set(
+		"n",
+		"D",
+		"v:count == 0 ? 'dg$' : 'D'",
+		{ expr = true, desc = "[D]elete to end of line (include 'wrap')" }
+	)
+	vim.keymap.set(
+		"n",
+		"C",
+		"v:count == 0 ? 'cg$' : 'C'",
+		{ expr = true, desc = "[C]hange to end of line (include 'wrap')" }
+	)
+	vim.keymap.set(
+		"n",
+		"Y",
+		"v:count == 0 ? 'yg$' : 'y$'",
+		{ expr = true, desc = "[Y]ank to end of line (include 'wrap')" }
+	)
+	---------------
+	vim.keymap.set(
+		"v",
+		"j",
+		"v:count == 0 ? 'gj' : 'j'",
+		{ expr = true, desc = "cursor N lines downward (include 'wrap')" }
+	)
+	vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "cursor N lines up (include 'wrap')" })
+	vim.keymap.set("v", "0", "g0", { desc = "first char of the line (include 'wrap')" })
+	vim.keymap.set("v", "^", "g^", { desc = "first non-blank character of the line (include 'wrap')" })
+	vim.keymap.set("v", "$", "g$", { desc = "end of the line (include 'wrap')" })
+end
 
 -- =================
 -- Terminal Mappings

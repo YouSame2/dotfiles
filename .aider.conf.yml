@@ -4,8 +4,10 @@ cache-prompts: true
 auto-commits: false
 # watch-files: true
 analytics-disable: true # only needed first launch
-vim: true
+# vim: true
 # multiline: true
+assistant-output-color: "ffffff"
+# user-input-color: "ffffff"
 
 #################################
 # model dependent settings. use 1
@@ -14,5 +16,5 @@ vim: true
 # model: gemini/gemini-2.0-flash
 
 #################################
-model: gemini/gemini-2.5-flash-preview-04-17
+model: gemini/gemini-2.5-flash-preview-05-20
 # edit-format: diff # [whole diff diff-fenced udiff]

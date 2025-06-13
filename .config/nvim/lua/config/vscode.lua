@@ -7,9 +7,12 @@ end, { desc = "Next buffer" })
 vim.keymap.set("n", "<S-h>", function()
 	vscode.action("workbench.action.previousEditorInGroup")
 end, { desc = "Previous buffer" })
+vim.keymap.set("n", "<C-w>O", function()
+	vscode.action("workbench.action.closeOtherEditors")
+end, { desc = "Close all other editor windows in VSCode" })
 
 vim.keymap.set("n", "<leader>ut", function()
-	vscode.action("workbench.action.toggleTerminal")
+	vscode.action("workbench.action.terminal.toggleTerminal")
 end, { desc = "Toggle integrated terminal" })
 vim.keymap.set("n", "<leader>e", function()
 	vscode.action("workbench.action.toggleSidebarVisibility")
@@ -62,3 +65,25 @@ end, { desc = "Previous Problem" })
 vim.keymap.set("n", "<leader>ff", function()
 	vscode.action("workbench.action.quickOpen")
 end, { desc = "Quick Open File" })
+
+-- =================
+-- line wrap keymaps
+-- =================
+vim.keymap.set("n", "j", "gj", { remap = true, desc = "cursor N lines downward (include 'wrap')" })
+vim.keymap.set("n", "k", "gk", { remap = true, desc = "cursor N lines up (include 'wrap')" })
+vim.keymap.set({ "n", "o", "x" }, "0", "g0", { remap = true, desc = "first char of the line (include 'wrap')" })
+vim.keymap.set({ "n", "o", "x" }, "$", "g$", { remap = true, desc = "end of the line (include 'wrap')" })
+vim.keymap.set("n", "A", "g$a", { remap = true, desc = "A (include 'wrap')" }) -- vscode handles this differently (broken)
+vim.keymap.set("n", "I", "g0i", { remap = true, desc = "i (include 'wrap')" }) -- vscode handles this differently
+---------------
+-- NOTE: below changes behavior of Y,D,C to respect line wrap. comment out to have normal behavior. keep in mind you can still achive the same normal behavior just by double tapping. i.e. 'yy' or 'dd'
+vim.keymap.set(
+	{ "n", "o", "x", "v" },
+	"^",
+	"g^",
+	{ remap = true, desc = "first non-blank character of the line (include 'wrap')" }
+)
+---------------
+vim.keymap.set("n", "D", "dg$", { remap = true, desc = "[D]elete to end of line (include 'wrap')" })
+vim.keymap.set("n", "C", "cg$", { remap = true, desc = "[C]hange to end of line (include 'wrap')" })
+vim.keymap.set("n", "Y", "yg$", { remap = true, desc = "[Y]ank to end of line (include 'wrap')" })

@@ -37,6 +37,7 @@ alias so='source'
 # credit: https://github.com/andrew8088/dotfiles/blob/main/zsh/aliases.zsh
 alias gc='git commit'
 alias gs='git status -s'
+alias gss='git status'
 alias gco='git checkout'
 alias ga='git add'
 alias gb='git branch'
